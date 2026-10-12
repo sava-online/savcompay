@@ -1,0 +1,582 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#16a34a" />
+  <meta name="description" content="SavcomPay — веб-кошелёк и переводы." />
+  <link rel="canonical" href="https://savcompay.ru/" />
+  <meta name="application-name" content="SavcomPay" />
+  <title>SavcomPay — v1.1.0</title>
+  <style>
+*{box-sizing:border-box} :root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#101713;background:#f7f8f7}body{margin:0;background:#f7f8f7}.hidden{display:none!important}.auth-screen{min-height:100vh;display:grid;place-items:center;padding:24px;background:linear-gradient(145deg,#ecfff1,#f7f8f7)}.auth-card{width:min(440px,100%);background:#fff;border:1px solid #e7ebe8;border-radius:28px;padding:30px;box-shadow:0 20px 70px #10351b14}.brand{display:flex;align-items:center;gap:12px;margin-bottom:26px}.brand-mark{width:48px;height:48px;border-radius:16px;background:#16a34a;color:#fff;display:grid;place-items:center;font-size:25px;font-weight:800}.brand-name{font-weight:800;font-size:22px}.brand-sub{font-size:13px;color:#7a837d;margin-top:2px}.auth-tabs{display:grid;grid-template-columns:1fr 1fr;background:#f2f5f3;padding:4px;border-radius:14px;margin-bottom:20px}.auth-tab{border:0;background:transparent;padding:11px;border-radius:11px;font-weight:700;color:#66706a;cursor:pointer}.auth-tab.active{background:#fff;color:#111;box-shadow:0 2px 10px #0000000c}.field{display:block;margin:14px 0}.field span{display:block;font-size:13px;font-weight:700;margin-bottom:7px}.field input{width:100%;height:48px;border:1px solid #dce2de;border-radius:13px;padding:0 14px;font-size:15px;outline:none}.field input:focus,.field select:focus{border-color:#16a34a;box-shadow:0 0 0 3px #16a34a1a}.field select{width:100%;height:48px;border:1px solid #dce2de;border-radius:13px;padding:0 14px;font-size:15px;background:#fff}.primary-btn,.white-btn,.ghost-white-btn{border:0;border-radius:14px;height:48px;font-weight:800;cursor:pointer}.primary-btn{width:100%;background:#16a34a;color:#fff;margin-top:7px}.error{min-height:18px;color:#c62828;font-size:13px}.app{min-height:100vh;padding-bottom:92px}.topbar{height:74px;background:#fff;display:flex;align-items:center;gap:14px;padding:12px max(16px,calc((100vw - 980px)/2));position:sticky;top:0;z-index:5;border-bottom:1px solid #eef1ef}.search{height:46px;background:#f2f4f3;border-radius:15px;display:flex;align-items:center;gap:9px;padding:0 14px;flex:1;max-width:620px}.search svg{width:20px;stroke:#8a938d;fill:none;stroke-width:1.8}.search input{border:0;outline:0;background:transparent;width:100%;font-size:15px}.icon-btn{width:46px;height:46px;border:0;background:#fff;border-radius:14px;display:grid;place-items:center;cursor:pointer}.icon-btn svg{width:24px;fill:none;stroke:#111;stroke-width:1.8}.content{width:min(980px,100%);margin:auto;padding:24px 18px}.balance-card{background:linear-gradient(135deg,#16a34a,#21bd62);color:#fff;border-radius:28px;padding:30px 28px;min-height:190px;box-shadow:0 14px 35px #16a34a30}.balance-label{opacity:.86;font-size:14px}.balance-value{font-size:40px;line-height:1.1;font-weight:850;letter-spacing:-1px;margin:10px 0 20px}.balance-actions{display:flex;gap:10px}.white-btn{background:#fff;color:#11652f;padding:0 25px}.ghost-white-btn{background:#ffffff20;color:#fff;border:1px solid #ffffff45;padding:0 18px}.section{margin-top:30px}.section-title-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}.section-title-row h2{font-size:23px;margin:0;letter-spacing:-.4px}.link-btn{border:0;background:transparent;color:#168d46;font-weight:750;cursor:pointer}.actions-row{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.action-card{background:#fff;border:0;border-radius:18px;padding:14px 8px;min-height:124px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px;cursor:pointer;box-shadow:0 2px 12px #16251a08}.action-card span:last-child{font-size:13px;line-height:1.25;font-weight:650}.action-icon{width:54px;height:54px;border-radius:50%;display:grid;place-items:center}.action-icon svg,.list-icon svg{width:27px;height:27px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}.green{background:#e7f8ec;color:#159447}.lime{background:#f0f9dc;color:#79a923}.mint{background:#e6f8f4;color:#129d84}.blue{background:#e8f1ff;color:#3877c7}.orange{background:#fff1dc;color:#d8891b}.promo{margin-top:26px;border-radius:24px;background:#13271a;color:#fff;min-height:190px;overflow:hidden;display:flex;justify-content:space-between;align-items:center;padding:28px 30px}.promo-kicker{font-size:12px;letter-spacing:1.5px;color:#79e39b;font-weight:800}.promo h3{font-size:25px;margin:7px 0}.promo p{color:#c6d2ca;margin:0;max-width:430px}.promo-art{width:190px}.promo-art svg{width:100%;fill:#21bd62;stroke:#fff;stroke-width:2}.useful{padding-bottom:10px}.list-item{width:100%;border:0;background:#fff;min-height:66px;border-bottom:1px solid #eef1ef;display:flex;align-items:center;gap:14px;padding:0 14px;text-align:left;font-size:15px;font-weight:650;cursor:pointer}.list-item:first-of-type{border-radius:18px 18px 0 0}.list-item:last-of-type{border-radius:0 0 18px 18px;border:0}.list-icon{width:40px;height:40px;border-radius:12px;background:#edf8ef;color:#149247;display:grid;place-items:center}.chevron{margin-left:auto;width:20px;stroke:#99a19b;fill:none;stroke-width:2}.bottom-nav{position:fixed;bottom:0;left:0;right:0;height:78px;background:#fff;border-top:1px solid #e9eeeb;display:flex;justify-content:center;z-index:10;padding-bottom:env(safe-area-inset-bottom)}.nav-item{width:150px;max-width:20%;border:0;background:#fff;color:#9aa19c;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;font-size:11px;font-weight:650}.nav-item svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}.nav-item.active{color:#16a34a}.modal-backdrop{position:fixed;inset:0;background:#08150c70;z-index:30;display:grid;place-items:end center;padding:12px}.modal{background:#fff;width:min(560px,100%);border-radius:26px 26px 18px 18px;padding:22px;max-height:90vh;overflow:auto;box-shadow:0 30px 90px #0003}.modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}.modal-head h3{margin:0;font-size:21px}.close{width:38px;height:38px;border:0;border-radius:12px;background:#f1f4f2;cursor:pointer;font-size:22px}.modal .field{margin:12px 0}.modal-note{font-size:13px;color:#737d76;background:#f3f7f4;border-radius:13px;padding:12px}.modal-actions{display:flex;gap:10px;margin-top:16px}.modal-actions button{flex:1}.qr-box{background:#f4f7f5;border-radius:20px;padding:22px;text-align:center}.qr-box img{width:220px;height:220px;image-rendering:auto;background:#fff;padding:12px;border-radius:12px}.id-code{font-size:30px;font-weight:850;letter-spacing:2px;text-align:center;margin:10px 0 20px}.chat-search{display:flex;gap:8px}.chat-search input,.field-input,.chat-compose input{min-width:0;height:44px;border:1px solid #dce2de;border-radius:12px;padding:0 12px;font:inherit;outline:none}.chat-search input{flex:1}.chat-search input:focus,.field-input:focus,.chat-compose input:focus{border-color:#16a34a;box-shadow:0 0 0 3px #16a34a1a}.secondary-btn{border:1px solid #dce2de;border-radius:12px;background:#fff;min-height:44px;padding:10px 14px;font-weight:700;cursor:pointer}.steam-hero{background:linear-gradient(135deg,#18334a,#10212f);border-radius:22px;padding:22px;color:#fff;margin:14px 0}.steam-hero small{color:#b9d0df;letter-spacing:1px;font-weight:800}.steam-hero h3{font-size:27px;margin:9px 0}.status-pill{display:inline-block;padding:7px 10px;background:#ffffff1b;border-radius:10px;font-size:12px}.notice-box{padding:13px;border-radius:14px;background:#fff8e7;color:#765313;font-size:13px;line-height:1.5;margin:12px 0}.asset-card{background:#fff;border-radius:17px;padding:17px;display:flex;gap:13px;align-items:center;margin:10px 0;box-shadow:0 2px 12px #16251a08}.asset-symbol{width:44px;height:44px;border-radius:14px;background:#edf8ef;color:#159447;display:grid;place-items:center;font-weight:850}.asset-card small{display:block;color:#7b847e;margin-top:4px}.asset-card .asset-status{margin-left:auto;color:#7b847e;font-size:12px;text-align:right}.chat-messages{height:280px;overflow:auto;background:#f5f7f6;border-radius:18px;padding:15px;display:flex;flex-direction:column;gap:8px}.msg{max-width:80%;padding:9px 12px;border-radius:14px;background:#fff;align-self:flex-start;font-size:14px}.msg.mine{align-self:flex-end;background:#dff7e7}.chat-compose{display:flex;gap:8px;margin-top:10px}.chat-compose input{flex:1}.history-row{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid #edf0ee}.history-dot{width:38px;height:38px;border-radius:12px;background:#e9f7ed;color:#159447;display:grid;place-items:center;font-weight:800}.history-meta{flex:1}.history-meta b{display:block}.history-meta small{color:#7b847e}.amount-plus{font-weight:800;color:#159447}.amount-minus{font-weight:800;color:#bd4a4a}.toast{position:fixed;left:50%;bottom:92px;transform:translate(-50%,20px);opacity:0;background:#111d14;color:#fff;border-radius:13px;padding:11px 15px;font-size:14px;z-index:100;transition:.2s;pointer-events:none}.toast.show{opacity:1;transform:translate(-50%,0)}@media(max-width:760px){.content{padding:16px 12px}.balance-card{border-radius:22px;padding:24px 20px}.balance-value{font-size:33px}.actions-row{grid-template-columns:repeat(3,1fr)}.action-card:nth-child(n+4){display:none}.promo{min-height:175px;padding:22px}.promo-art{width:130px}.promo h3{font-size:21px}.nav-item{width:auto;flex:1}.topbar{padding:10px 12px}.search{max-width:none}.ghost-white-btn{display:none}}@media(max-width:430px){.actions-row{grid-template-columns:repeat(3,1fr);gap:7px}.action-card{min-height:112px}.action-icon{width:47px;height:47px}.balance-actions{gap:7px}.white-btn{padding:0 18px}.promo-art{display:none}}
+
+  </style>
+</head>
+<body>
+  <div id="authScreen" class="auth-screen">
+    <div class="auth-card">
+      <div class="brand">
+        <div class="brand-mark">S</div>
+        <div>
+          <div class="brand-name">SavcomPay</div>
+          <div class="brand-sub">простой электронный кошелёк</div>
+        </div>
+      </div>
+
+      <div class="auth-tabs">
+        <button class="auth-tab active" data-mode="login">Войти</button>
+        <button class="auth-tab" data-mode="register">Регистрация</button>
+      </div>
+
+      <form id="authForm">
+        <label class="field" id="nameField">
+          <span>Имя</span>
+          <input id="nameInput" type="text" placeholder="Как к вам обращаться" autocomplete="name" />
+        </label>
+        <label class="field">
+          <span>Email</span>
+          <input id="emailInput" type="email" placeholder="you@example.com" autocomplete="email" required />
+        </label>
+        <label class="field">
+          <span>Пароль</span>
+          <input id="passwordInput" type="password" placeholder="Минимум 6 символов" autocomplete="current-password" minlength="6" required />
+        </label>
+        <button class="primary-btn" type="submit" id="authSubmit">Войти</button>
+        <button type="button" class="link-btn" id="forgotPasswordBtn" style="margin-top:12px">Забыли пароль?</button>
+        <button type="button" class="link-btn hidden" id="resendVerificationBtn" style="display:block;margin-top:8px">Отправить письмо подтверждения</button>
+        <button type="button" class="link-btn hidden" id="confirmedEmailBtn" style="display:block;margin-top:8px">Я подтвердил email</button>
+        <p id="authError" class="error" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+
+  <div id="app" class="app hidden">
+    <header class="topbar">
+      <div class="search">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 5 5"/></svg>
+        <input id="globalSearch" placeholder="Поиск" />
+      </div>
+      <button class="icon-btn" id="notificationsBtn" aria-label="Уведомления">
+        <svg viewBox="0 0 24 24"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M10 21h4"/></svg>
+      </button>
+    </header>
+
+    <main class="content">
+      <section class="balance-card">
+        <div class="balance-label">Ваш баланс</div>
+        <div class="balance-value"><span id="balanceValue">0,00</span> ₽</div>
+        <div class="balance-actions">
+          <button class="white-btn" id="topupBtn">Пополнить кошелёк</button>
+          <button class="ghost-white-btn" id="showIdBtn">Мой ID</button>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-title-row">
+          <h2>Платежи и переводы</h2>
+          <button class="link-btn" id="allActionsBtn">Все</button>
+        </div>
+
+        <div class="actions-row">
+          <button class="action-card" data-action="transfer">
+            <span class="action-icon green"><svg viewBox="0 0 24 24"><path d="M4 7h13"/><path d="m13 3 4 4-4 4"/><path d="M20 17H7"/><path d="m11 13-4 4 4 4"/></svg></span>
+            <span>Перевод<br>по ID</span>
+          </button>
+          <button class="action-card" data-action="qr">
+            <span class="action-icon lime"><svg viewBox="0 0 24 24"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4z"/><path d="M14 14h3v3h-3zM20 14v6M17 20h3"/></svg></span>
+            <span>QR-код<br>кошелька</span>
+          </button>
+          <button class="action-card" data-action="cards">
+            <span class="action-icon mint"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg></span>
+            <span>Мои<br>кошельки</span>
+          </button>
+          <button class="action-card" data-action="chat">
+            <span class="action-icon blue"><svg viewBox="0 0 24 24"><path d="M20 11.5a7.5 7.5 0 0 1-8 7.5 8.5 8.5 0 0 1-4-.9L4 20l1.3-3.2A7.3 7.3 0 0 1 4 12a7.5 7.5 0 0 1 8-7.5 7.5 7.5 0 0 1 8 7z"/></svg></span>
+            <span>Чаты</span>
+          </button>
+          <button class="action-card" data-action="history">
+            <span class="action-icon orange"><svg viewBox="0 0 24 24"><path d="M12 8v5l3 2"/><circle cx="12" cy="12" r="8"/><path d="M4 5v4h4"/></svg></span>
+            <span>История</span>
+          </button>
+        </div>
+      </section>
+
+      <section class="promo">
+        <div>
+          <div class="promo-kicker">SAVCOMPAY</div>
+          <h3>Отправляйте деньги<br>друзьям по ID</h3>
+          <p>Быстрые внутренние переводы и чат в одном месте.</p>
+        </div>
+        <div class="promo-art" aria-hidden="true">
+          <svg viewBox="0 0 150 120">
+            <path d="M18 67c10-28 42-47 73-42 28 4 43 27 38 50-5 25-32 37-64 34-31-3-56-18-47-42z"/>
+            <circle cx="61" cy="57" r="18"/>
+            <path d="M51 58h20M61 48v20"/>
+            <path d="M92 35l19-13M100 49l26-3M96 68l26 10"/>
+          </svg>
+        </div>
+      </section>
+
+      <section class="section useful">
+        <div class="section-title-row">
+          <h2>Полезное</h2>
+        </div>
+        <button class="list-item" data-action="qr">
+          <span class="list-icon"><svg viewBox="0 0 24 24"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4z"/><path d="M14 14h3v3h-3zM20 14v6M17 20h3"/></svg></span>
+          <span>Мой QR-код</span>
+          <svg class="chevron" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg>
+        </button>
+        <button class="list-item" data-action="topup">
+          <span class="list-icon"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="2"/><path d="M8 9h8M8 13h5"/></svg></span>
+          <span>Пополнить кошелёк</span>
+          <svg class="chevron" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg>
+        </button>
+        <button class="list-item" data-action="steam">
+          <span class="list-icon" style="background:#eaf1f8;color:#244a68"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="15.5" cy="8.5" r="2.5"/><path d="m5 14 5 2 3-3"/></svg></span>
+          <span>Пополнение Steam</span>
+          <svg class="chevron" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg>
+        </button>
+      </section>
+    </main>
+
+    <nav class="bottom-nav">
+      <button class="nav-item active"><svg viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5V20H4z"/><path d="M9 20v-6h6v6"/></svg><span>Главная</span></button>
+      <button class="nav-item" data-action="cards"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg><span>Кошельки</span></button>
+      <button class="nav-item" data-action="history"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v5l3 2"/></svg><span>История</span></button>
+      <button class="nav-item" data-action="chat"><svg viewBox="0 0 24 24"><path d="M20 11.5a7.5 7.5 0 0 1-8 7.5 8.5 8.5 0 0 1-4-.9L4 20l1.3-3.2A7.3 7.3 0 0 1 4 12a7.5 7.5 0 0 1 8-7.5 7.5 7.5 0 0 1 8 7z"/></svg><span>Чаты</span></button>
+      <button class="nav-item" id="profileBtn"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M5 20c.8-4 3-6 7-6s6.2 2 7 6"/></svg><span>Профиль</span></button>
+    </nav>
+  </div>
+
+  <div id="modalRoot"></div>
+  <div style="text-align:center;color:#8a938d;font-size:11px;padding:8px 12px 90px">SavcomPay v1.1.0 · savcompay.ru</div>
+  <div id="toast" class="toast"></div>
+
+  <script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+import {
+  getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,
+  onAuthStateChanged, updateProfile, signOut, sendEmailVerification,
+  sendPasswordResetEmail, reload
+} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+import {
+  getDatabase, ref, set, get, push, onValue, query, orderByChild, equalTo,
+  runTransaction, serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyC9rKXKdnooeJlN8e8_ydbakgEs8ybs60o",
+  authDomain: "savcompay.firebaseapp.com",
+  databaseURL: "https://savcompay-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "savcompay",
+  storageBucket: "savcompay.firebasestorage.app",
+  messagingSenderId: "323188285385",
+  appId: "1:323188285385:web:d5c2e68347a660cf7a1218",
+  measurementId: "G-FFEXJW14NW"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getDatabase(app);
+
+const $ = (s) => document.querySelector(s);
+const $$ = (s) => [...document.querySelectorAll(s)];
+
+let authMode = "login";
+let currentUser = null;
+let currentProfile = null;
+let chatUnsub = null;
+let balance = 0; // Не показываем выдуманные средства: реальные балансы требуют отдельной интеграции.
+
+function esc(s=""){
+  s=String(s ?? "");
+  return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
+}
+function money(n){ return Number(n).toLocaleString("ru-RU",{minimumFractionDigits:2,maximumFractionDigits:2}); }
+function toast(msg){ const el=$("#toast"); el.textContent=msg; el.classList.add("show"); setTimeout(()=>el.classList.remove("show"),2200); }
+
+function randomSavcomId(){ return String(Math.floor(10000000 + Math.random()*90000000)); }
+
+async function reserveSavcomId(uid){
+  for(let i=0;i<8;i++){
+    const id=randomSavcomId();
+    const result=await runTransaction(ref(db, `savcomIds/${id}`), cur => cur ?? uid);
+    if(result.committed && result.snapshot.val() === uid) return id;
+  }
+  throw new Error("Не удалось создать уникальный SavcomPay ID.");
+}
+
+async function createProfile(user, displayName){
+  const existing=await get(ref(db, `users/${user.uid}`));
+  if(existing.exists()) return existing.val();
+
+  const savcomId=await reserveSavcomId(user.uid);
+  const profile={
+    uid:user.uid,
+    savcomId,
+    displayName:displayName || user.email?.split("@")[0] || "Пользователь",
+    email:user.email || "",
+    createdAt:serverTimestamp()
+  };
+  await set(ref(db, `users/${user.uid}`), profile);
+  return profile;
+}
+
+async function loadProfile(user){
+  const snap=await get(ref(db, `users/${user.uid}`));
+  if(snap.exists()) return snap.val();
+  return createProfile(user, user.displayName);
+}
+
+function setAuthMode(mode){
+  authMode=mode;
+  $$(".auth-tab").forEach(b=>b.classList.toggle("active",b.dataset.mode===mode));
+  $("#nameField").style.display=mode==="register"?"block":"none";
+  $("#authSubmit").textContent=mode==="register"?"Создать аккаунт":"Войти";
+  $("#authError").textContent="";
+}
+
+async function handleAuth(e){
+  e.preventDefault();
+  const email=$("#emailInput").value.trim();
+  const password=$("#passwordInput").value;
+  const name=$("#nameInput").value.trim();
+  $("#authError").textContent="";
+  try{
+    if(authMode==="register"){
+      if(name.length < 2) throw new Error("Введите имя (минимум 2 символа).");
+      const cred=await createUserWithEmailAndPassword(auth,email,password);
+      if(name) await updateProfile(cred.user,{displayName:name});
+      await sendEmailVerification(cred.user);
+      $("#authError").textContent="Аккаунт создан. Откройте письмо от Firebase и подтвердите email, затем нажмите «Я подтвердил email».";
+      $("#resendVerificationBtn").classList.remove("hidden");
+      $("#confirmedEmailBtn").classList.remove("hidden");
+    }else{
+      const cred=await signInWithEmailAndPassword(auth,email,password);
+      if(!cred.user.emailVerified){
+        $("#authError").textContent="Сначала подтвердите email по ссылке в письме. Если письма нет, нажмите «Отправить письмо подтверждения».";
+        $("#resendVerificationBtn").classList.remove("hidden");
+        $("#confirmedEmailBtn").classList.remove("hidden");
+      }
+    }
+  }catch(err){
+    $("#authError").textContent=humanFirebaseError(err);
+  }
+}
+
+function humanFirebaseError(err){
+  const code=err?.code || "";
+  const map={
+    "auth/email-already-in-use":"Этот email уже зарегистрирован.",
+    "auth/invalid-email":"Некорректный email.",
+    "auth/weak-password":"Пароль должен быть не короче 6 символов.",
+    "auth/invalid-credential":"Неверный email или пароль.",
+    "auth/invalid-login-credentials":"Неверный email или пароль.",
+    "auth/network-request-failed":"Проблема с сетью.",
+    "auth/too-many-requests":"Слишком много попыток. Подождите и попробуйте позже.",
+    "auth/operation-not-allowed":"Этот способ входа не включён в Firebase Console."
+  };
+  return map[code] || err?.message || "Произошла ошибка.";
+}
+
+function updateUI(){
+  $("#balanceValue").textContent=money(balance);
+}
+
+function openModal(title, body, onReady){
+  $("#modalRoot").innerHTML=`
+    <div class="modal-backdrop" id="modalBackdrop">
+      <div class="modal">
+        <div class="modal-head"><h3>${esc(title)}</h3><button class="close" id="closeModal">×</button></div>
+        ${body}
+      </div>
+    </div>`;
+  $("#closeModal").onclick=closeModal;
+  $("#modalBackdrop").addEventListener("click",e=>{if(e.target.id==="modalBackdrop")closeModal()});
+  if(onReady) onReady();
+}
+function closeModal(){ $("#modalRoot").innerHTML=""; }
+
+function showId(){
+  const id=currentProfile?.savcomId || "";
+  const qrData=encodeURIComponent(`savcompay://user/${id}`);
+  openModal("Мой SavcomPay ID",`
+    <div class="qr-box">
+      <img alt="QR-код" src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${qrData}">
+      <div class="id-code">${esc(id)}</div>
+      <div class="modal-note">Этот ID предназначен для поиска пользователя внутри SavcomPay. QR сейчас демонстрационный.</div>
+    </div>
+  `);
+}
+
+function showTopup(){
+  openModal("Пополнить кошелёк",`
+    <div class="notice-box"><b>Пополнение пока не подключено.</b><br>Этот экран не принимает деньги и не создаёт фиктивные зачисления. Для реального пополнения потребуется подключить платёжного провайдера или блокчейн-транзакцию.</div>
+    <div class="asset-card"><div class="asset-symbol">TON</div><div><b>Toncoin</b><small>Блокчейн TON</small></div><div class="asset-status">Не подключено</div></div>
+    <div class="asset-card"><div class="asset-symbol">USDT</div><div><b>Tether USD</b><small>Jetton в сети TON</small></div><div class="asset-status">Не подключено</div></div>
+    <button class="primary-btn" id="openAssetsBtn">Посмотреть кошельки</button>
+  `,()=>$("#openAssetsBtn").onclick=showWallets);
+}
+
+function showWallets(){
+  openModal("Мои кошельки",`
+    <div class="asset-card"><div class="asset-symbol">TON</div><div><b>Toncoin</b><small>Баланс не загружен из блокчейна</small></div><div class="asset-status">— TON</div></div>
+    <div class="asset-card"><div class="asset-symbol">USDT</div><div><b>USDT (TON Jetton)</b><small>Нужен адрес кошелька и проверка Jetton-контракта</small></div><div class="asset-status">— USDT</div></div>
+    <div class="notice-box">Это пока интерфейс. Не вводите seed-фразу или приватный ключ на этой странице: подключение безопасного TON-кошелька ещё не реализовано.</div>
+  `);
+}
+
+function showSteam(){
+  openModal("Пополнение Steam",`
+    <div class="steam-hero"><small>SAVCOMPAY GAMING</small><h3>Steam</h3><p>Подготовка заказа через API поставщика.</p><div class="status-pill">Поставщик не подключён</div></div>
+    <div class="notice-box">Это не настоящее пополнение: серверный API поставщика пока отсутствует. Деньги не списываются и заказ не создаётся, пока backend не будет настроен.</div>
+    <label class="field"><span>Логин Steam или идентификатор</span><input id="steamAccount" maxlength="100" autocomplete="off" placeholder="Введите логин Steam"></label>
+    <label class="field"><span>Сумма</span><input id="steamAmount" type="number" min="1" max="100000" step="1" placeholder="Например, 500"></label>
+    <label class="field"><span>Регион / валюта</span><select id="steamCurrency" class="field-input" style="width:100%"><option value="">Сначала выберите поставщика</option></select></label>
+    <button class="primary-btn" id="steamOrderBtn">Проверить подключение</button>
+    <div class="modal-note" style="margin-top:12px">Поддерживаемые страны, валюты, суммы и итоговая комиссия должны загружаться с API выбранного поставщика, а не задаваться наугад в браузере.</div>
+  `,()=>{
+    $("#steamOrderBtn").onclick=async()=>{
+      const account=$("#steamAccount").value.trim();
+      const amount=Number($("#steamAmount").value);
+      if(!account) return toast("Введите логин Steam");
+      if(!Number.isFinite(amount)||amount<1||amount>100000) return toast("Проверьте сумму");
+      if(!auth.currentUser) return toast("Сначала войдите в аккаунт");
+      try{
+        const response=await fetch("/api/steam/catalog",{headers:{"Authorization":"Bearer "+await auth.currentUser.getIdToken()}});
+        if(!response.ok) throw new Error("API поставщика не настроен на сервере.");
+        const data=await response.json();
+        const select=$("#steamCurrency");
+        select.innerHTML="<option value=''>Выберите доступный вариант</option>";
+        (Array.isArray(data.items)?data.items:[]).forEach(item=>{
+          if(!item || typeof item.id!=="string" || typeof item.name!=="string") return;
+          const option=document.createElement("option"); option.value=item.id; option.textContent=item.name; select.appendChild(option);
+        });
+        toast("Каталог загружен. Выберите вариант и повторите проверку.");
+        $("#steamOrderBtn").textContent="Создать заказ";
+        $("#steamOrderBtn").onclick=()=>createSteamOrder(account,amount,select.value);
+      }catch(err){
+        console.error("Steam catalog:",err);
+        toast(err.message||"Не удалось подключиться к API Steam.");
+      }
+    };
+  });
+}
+
+async function createSteamOrder(account,amount,productId){
+  if(!productId) return toast("Выберите вариант пополнения из каталога");
+  if(!confirm(`Создать заказ на пополнение Steam?\nАккаунт: ${account}\nСумма: ${amount}\nПроверьте регион аккаунта. Оплата будет возможна только после ответа сервера.`)) return;
+  try{
+    const response=await fetch("/api/steam/orders",{
+      method:"POST",
+      headers:{"Content-Type":"application/json","Authorization":"Bearer "+await auth.currentUser.getIdToken()},
+      body:JSON.stringify({account,amount,productId})
+    });
+    const result=await response.json().catch(()=>({}));
+    if(!response.ok) throw new Error(result.error||"Сервер не смог создать заказ.");
+    if(!result.orderId) throw new Error("Сервер не вернул номер заказа.");
+    toast("Заказ создан: "+String(result.orderId));
+    closeModal();
+  }catch(err){console.error("Steam order:",err);toast(err.message||"Ошибка создания заказа");}
+}
+
+async function findUserById(id){
+  const snap=await get(query(ref(db,"users"),orderByChild("savcomId"),equalTo(id)));
+  let found=null;
+  snap.forEach(c=>found=c.val());
+  return found;
+}
+
+function showTransfer(){
+  openModal("Перевод по SavcomPay ID",`
+    <div class="modal-note">Введите уникальный ID получателя. В этой версии перевод меняет только локальный демо-баланс.</div>
+    <label class="field"><span>Савком ID получателя</span><input id="receiverId" inputmode="numeric" placeholder="Например, 58392017"></label>
+    <label class="field"><span>Сумма, ₽</span><input id="transferAmount" type="number" min="0.01" step="0.01" placeholder="500"></label>
+    <label class="field"><span>Сообщение (необязательно)</span><input id="transferMessage" maxlength="140" placeholder="Спасибо!"></label>
+    <div class="modal-actions"><button class="primary-btn" id="transferBtn">Продолжить</button></div>
+  `,()=>{
+    $("#transferBtn").onclick=async()=>{
+      const id=$("#receiverId").value.trim();
+      const amount=Number($("#transferAmount").value);
+      const message=$("#transferMessage").value.trim();
+      if(!/^\d{8}$/.test(id)) return toast("ID должен состоять из 8 цифр");
+      if(!amount || amount<=0) return toast("Введите сумму");
+      if(amount>balance) return toast("Недостаточно средств");
+      if(id===currentProfile.savcomId) return toast("Нельзя отправить самому себе");
+      try{
+        const receiver=await findUserById(id);
+        if(!receiver) return toast("Пользователь не найден");
+        balance-=amount; updateUI(); closeModal();
+        toast(`Демо-перевод ${money(amount)} ₽ пользователю ${receiver.displayName}`);
+        await addHistory({
+          type:"out",
+          amount,
+          title:`Перевод ${receiver.displayName}`,
+          note:message || `ID ${id}`
+        });
+      }catch(err){ toast("Ошибка поиска пользователя"); }
+    };
+  });
+}
+
+async function addHistory(item){
+  if(!currentUser) return;
+  await push(ref(db,`history/${currentUser.uid}`),{
+    ...item, createdAt:serverTimestamp()
+  }).catch(()=>{});
+}
+
+async function showHistory(){
+  if(!currentUser) return;
+  const snap=await get(ref(db,`history/${currentUser.uid}`));
+  const rows=[];
+  snap.forEach(c=>rows.push(c.val()));
+  rows.sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
+  openModal("История", rows.length ? rows.map(x=>`
+    <div class="history-row">
+      <div class="history-dot">${x.type==="out"?"↑":"↓"}</div>
+      <div class="history-meta"><b>${esc(x.title||"Операция")}</b><small>${esc(x.note||"")}</small></div>
+      <div class="${x.type==="out"?"amount-minus":"amount-plus"}">${x.type==="out"?"−":"+"}${money(x.amount)} ₽</div>
+    </div>`).join("") : `<div class="modal-note">История пока пустая.</div>`);
+}
+
+function showChat(){
+  openModal("Чат",`
+    <div class="chat-search">
+      <input class="field-input" id="chatId" placeholder="SavcomPay ID собеседника" inputmode="numeric">
+      <button class="primary-btn" id="openChat" style="width:auto;padding:0 18px">Открыть</button>
+    </div>
+    <div id="chatArea" style="margin-top:14px"></div>
+  `,()=>{
+    $("#openChat").onclick=()=>openChat($("#chatId").value.trim());
+  });
+}
+
+async function openChat(otherId){
+  if(!/^\d{8}$/.test(otherId)) return toast("Введите 8-значный ID");
+  const other=await findUserById(otherId);
+  if(!other) return toast("Пользователь не найден");
+  if(chatUnsub) chatUnsub();
+  const ids=[currentProfile.savcomId,otherId].sort();
+  const chatId=ids.join("_");
+  const area=$("#chatArea");
+  area.innerHTML=`
+    <div class="modal-note">Чат с <b>${esc(other.displayName)}</b> · ID ${esc(otherId)}</div>
+    <div class="chat-messages" id="chatMessages" style="margin-top:10px"></div>
+    <div class="chat-compose"><input id="chatText" maxlength="500" placeholder="Написать сообщение..."><button class="primary-btn" id="sendChat" style="width:auto;padding:0 18px">➤</button></div>`;
+  const messagesRef=ref(db,`chats/${chatId}/messages`);
+  chatUnsub=onValue(messagesRef,snap=>{
+    const msgs=[]; snap.forEach(c=>msgs.push(c.val()));
+    msgs.sort((a,b)=>(a.createdAt||0)-(b.createdAt||0));
+    $("#chatMessages").innerHTML=msgs.map(m=>`<div class="msg ${m.senderId===currentProfile.savcomId?"mine":""}">${esc(m.text)}</div>`).join("");
+    const box=$("#chatMessages"); box.scrollTop=box.scrollHeight;
+  });
+  $("#sendChat").onclick=async()=>{
+    const input=$("#chatText"), text=input.value.trim();
+    if(!text) return;
+    await push(messagesRef,{senderId:currentProfile.savcomId,text,createdAt:serverTimestamp()});
+    input.value="";
+  };
+}
+
+function showProfile(){
+  openModal("Профиль",`
+    <div class="modal-note">
+      <b>${esc(currentProfile.displayName)}</b><br>
+      ${esc(currentProfile.email)}<br><br>
+      SavcomPay ID: <b>${esc(currentProfile.savcomId)}</b>
+    </div>
+    <div class="modal-actions"><button class="primary-btn" id="logoutBtn">Выйти</button></div>
+  `,()=>$("#logoutBtn").onclick=()=>signOut(auth));
+}
+
+function showQr(){
+  const id=currentProfile.savcomId;
+  const qrData=encodeURIComponent(`savcompay://user/${id}`);
+  openModal("QR-код кошелька",`
+    <div class="qr-box">
+      <img alt="QR-код SavcomPay" src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${qrData}">
+      <p>Покажите этот QR другому пользователю SavcomPay.</p>
+      <b>${esc(id)}</b>
+    </div>
+  `);
+}
+
+function action(name){
+  if(name==="topup") return showTopup();
+  if(name==="transfer") return showTransfer();
+  if(name==="chat") return showChat();
+  if(name==="history") return showHistory();
+  if(name==="qr") return showQr();
+  if(name==="cards") return showWallets();
+  if(name==="steam") return showSteam();
+}
+
+$$("[data-mode]").forEach(b=>b.onclick=()=>setAuthMode(b.dataset.mode));
+$("#authForm").addEventListener("submit",handleAuth);
+$("#forgotPasswordBtn").onclick=async()=>{
+  const email=$("#emailInput").value.trim();
+  if(!email) { $("#authError").textContent="Сначала введите email в поле выше."; return; }
+  try{ await sendPasswordResetEmail(auth,email); $("#authError").textContent="Если адрес зарегистрирован, Firebase отправит письмо для сброса пароля."; }
+  catch(err){ $("#authError").textContent=humanFirebaseError(err); }
+};
+$("#resendVerificationBtn").onclick=async()=>{
+  try{
+    if(!auth.currentUser) { $("#authError").textContent="Войдите с этим email и паролем, чтобы отправить письмо повторно."; return; }
+    await sendEmailVerification(auth.currentUser);
+    $("#authError").textContent="Письмо подтверждения отправлено повторно. Проверьте папку «Спам».";
+  }catch(err){ $("#authError").textContent=humanFirebaseError(err); }
+};
+$("#confirmedEmailBtn").onclick=async()=>{
+  try{
+    if(!auth.currentUser) { $("#authError").textContent="Сначала войдите в аккаунт."; return; }
+    await reload(auth.currentUser);
+    if(!auth.currentUser.emailVerified){ $("#authError").textContent="Firebase пока не видит подтверждение. Откройте ссылку в письме, затем попробуйте снова."; return; }
+    currentProfile=await loadProfile(auth.currentUser);
+    $("#authError").textContent="";
+    $("#resendVerificationBtn").classList.add("hidden"); $("#confirmedEmailBtn").classList.add("hidden");
+    $("#authScreen").classList.add("hidden"); $("#app").classList.remove("hidden"); updateUI();
+  }catch(err){ $("#authError").textContent=humanFirebaseError(err); }
+};
+$("#topupBtn").onclick=showTopup;
+$("#showIdBtn").onclick=showId;
+$("#profileBtn").onclick=showProfile;
+$$ ("[data-action]").forEach(b=>b.onclick=()=>action(b.dataset.action));
+$(".nav-item:first-child").onclick=()=>{ closeModal(); window.scrollTo({top:0,behavior:"smooth"}); };
+$("#notificationsBtn").onclick=()=>openModal("Уведомления",`<div class="modal-note">Пока уведомлений нет. Система уведомлений появится после подключения событий и серверной логики.</div>`);
+$("#globalSearch").addEventListener("keydown",e=>{if(e.key==="Enter"){const q=e.target.value.trim();if(q)toast("Поиск пользователей будет доступен после подключения поиска на сервере.");}});
+$("#allActionsBtn").onclick=()=>toast("Все функции уже показаны на главной");
+
+onAuthStateChanged(auth,async user=>{
+  currentUser=user;
+  if(user){
+    if(!user.emailVerified){
+      $("#app").classList.add("hidden");
+      $("#authScreen").classList.remove("hidden");
+      $("#authError").textContent="Подтвердите email по ссылке в письме, чтобы открыть SavcomPay.";
+      $("#resendVerificationBtn").classList.remove("hidden");
+      $("#confirmedEmailBtn").classList.remove("hidden");
+      return;
+    }
+    try{
+      currentProfile=await loadProfile(user);
+      $("#authScreen").classList.add("hidden");
+      $("#app").classList.remove("hidden");
+      $("#resendVerificationBtn").classList.add("hidden");
+      $("#confirmedEmailBtn").classList.add("hidden");
+      updateUI();
+    }catch(e){
+      $("#authError").textContent=humanFirebaseError(e);
+    }
+  }else{
+    if(chatUnsub) { chatUnsub(); chatUnsub=null; }
+    currentProfile=null;
+    $("#app").classList.add("hidden");
+    $("#authScreen").classList.remove("hidden");
+  }
+});
+
+  </script>
+</body>
+</html>
