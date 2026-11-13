@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GlassTube</title>
+<style>
+/* ============================================================
+   GlassTube — Liquid Glass design system (glass.css)
+   Calm, premium, glassy UI. Dark by default, light optional.
+   ============================================================ */
+
+:root {
+  /* Dark theme (default) */
+  --bg: #0a0c14;
+  --bg-2: #0e1120;
+  --text: #eef1f8;
+  --muted: #9aa3b8;
+  --accent: #7c8cff;
+  --accent-2: #43c6ff;
+  --glass-bg: rgba(255, 255, 255, 0.06);
+  --glass-bg-strong: rgba(255, 255, 255, 0.10);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --glass-blur: 18px;
+  --radius: 20px;
+  --radius-sm: 12px;
+  --shadow: 0 10px 40px rgba(0, 0, 0, 0.45);
+  --shadow-soft: 0 6px 22px rgba(0, 0, 0, 0.30);
+  --danger: #ff6b81;
+  --success: #46d39a;
+  --warning: #ffce6b;
+  --ring: rgba(124, 140, 255, 0.45);
+  --maxw: 1200px;
+}
+
+[data-theme="light"] {
+  --bg: #eef1f8;
+  --bg-2: #e4e9f4;
+  --text: #161a26;
+  --muted: #5b6379;
+  --accent: #5a6cff;
+  --accent-2: #1f9fe0;
+  --glass-bg: rgba(255, 255, 255, 0.55);
+  --glass-bg-strong: rgba(255, 255, 255, 0.72);
+  --glass-border: rgba(255, 255, 255, 0.7);
+  --glass-blur: 16px;
+  --shadow: 0 10px 34px rgba(40, 50, 90, 0.18);
+  --shadow-soft: 0 6px 18px rgba(40, 50, 90, 0.12);
+  --danger: #d8455f;
+  --success: #1faf76;
+  --warning: #c79100;
+  --ring: rgba(90, 108, 255, 0.35);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(1200px 600px at 12% -10%, rgba(124, 140, 255, 0.18), transparent 60%),
+    radial-gradient(1000px 500px at 100% 0%, rgba(67, 198, 255, 0.14), transparent 55%),
+    var(--bg);
+  background-attachment: fixed;
+  min-height: 100vh;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+a:hover { color: var(--accent); }
+
+img { max-width: 100%; display: block; }
+
+::selection { background: var(--ring); color: #fff; }
+
+/* ---------- Glass surfaces ---------- */
+.glass {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  backdrop-filter: blur(var(--glass-blur)) saturate(140%);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(140%);
+  box-shadow: var(--shadow-soft);
+}
+
+.glass-strong {
+  background: var(--glass-bg-strong);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  backdrop-filter: blur(var(--glass-blur)) saturate(150%);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(150%);
+  box-shadow: var(--shadow);
+}
+
+/* ---------- Layout ---------- */
+.container { max-width: var(--maxw); margin: 0 auto; padding: 0 18px; }
+.page { padding: 28px 0 64px; }
+.section { margin: 34px 0; }
+.section-head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 12px; margin-bottom: 14px;
+}
+.section-title { font-size: 1.25rem; font-weight: 650; letter-spacing: .2px; }
+.muted { color: var(--muted); }
+.row { display: flex; gap: 12px; flex-wrap: wrap; }
+.spacer { flex: 1; }
+
+/* ---------- Top navigation ---------- */
+.navbar {
+  position: sticky; top: 0; z-index: 50;
+  display: flex; align-items: center; gap: 16px;
+  padding: 12px 18px;
+  margin: 12px auto;
+  max-width: var(--maxw);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 18px;
+  backdrop-filter: blur(var(--glass-blur)) saturate(140%);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(140%);
+  box-shadow: var(--shadow-soft);
+}
+.brand { font-weight: 750; font-size: 1.15rem; letter-spacing: .3px; display: flex; align-items: center; gap: 10px; }
+.brand .dot {
+  width: 14px; height: 14px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  box-shadow: 0 0 16px var(--ring);
+}
+.nav-search { flex: 1; max-width: 520px; }
+.nav-links { display: flex; align-items: center; gap: 8px; }
+.nav-links a { padding: 8px 12px; border-radius: 12px; color: var(--muted); }
+.nav-links a:hover { color: var(--text); background: var(--glass-bg); }
+
+/* ---------- Forms ---------- */
+input, textarea, select, button { font: inherit; color: inherit; }
+.field { margin-bottom: 14px; }
+.field label { display: block; font-size: .85rem; color: var(--muted); margin-bottom: 6px; }
+.input, textarea.input, select.input {
+  width: 100%; padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  outline: none;
+  transition: border-color .15s, box-shadow .15s, background .15s;
+}
+[data-theme="light"] .input { background: rgba(255,255,255,0.6); }
+.input:focus { border-color: var(--accent); box-shadow: 0 0 0 4px var(--ring); }
+textarea.input { resize: vertical; min-height: 110px; }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 11px 18px; border-radius: 14px; cursor: pointer;
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  color: var(--text);
+  transition: transform .12s, background .15s, border-color .15s, box-shadow .15s;
+  backdrop-filter: blur(8px);
+}
+.btn:hover { background: var(--glass-bg-strong); transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  border-color: transparent; color: #fff; font-weight: 600;
+  box-shadow: 0 8px 24px var(--ring);
+}
+.btn-primary:hover { filter: brightness(1.05); }
+.btn-ghost { background: transparent; }
+.btn-danger { color: var(--danger); border-color: rgba(255,107,129,.4); }
+.btn-danger:hover { background: rgba(255,107,129,.12); }
+.btn-sm { padding: 7px 12px; border-radius: 11px; font-size: .85rem; }
+.btn[disabled] { opacity: .55; cursor: not-allowed; }
+
+/* ---------- Cards / grid ---------- */
+.grid {
+  display: grid; gap: 18px;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+}
+.video-card {
+  border-radius: var(--radius); overflow: hidden;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(var(--glass-blur)) saturate(140%);
+  transition: transform .15s, box-shadow .15s, border-color .15s;
+}
+.video-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); border-color: var(--accent); }
+.thumb {
+  position: relative; aspect-ratio: 16/9; width: 100%;
+  background: linear-gradient(135deg, #2a3155, #1a2238);
+  overflow: hidden;
+}
+.thumb img { width: 100%; height: 100%; object-fit: cover; }
+.thumb .duration {
+  position: absolute; right: 8px; bottom: 8px;
+  background: rgba(0,0,0,.6); color: #fff; font-size: .72rem;
+  padding: 2px 7px; border-radius: 8px;
+}
+.video-card .meta { padding: 12px 14px; }
+.video-card .title { font-weight: 600; font-size: .98rem; line-height: 1.35; }
+.video-card .sub { color: var(--muted); font-size: .82rem; margin-top: 4px; }
+.badge {
+  display: inline-block; font-size: .7rem; padding: 2px 8px; border-radius: 999px;
+  background: var(--glass-bg-strong); border: 1px solid var(--glass-border); color: var(--muted);
+}
+.badge.accent { color: var(--accent); border-color: var(--ring); }
+
+/* ---------- Avatar ---------- */
+.avatar {
+  width: 40px; height: 40px; border-radius: 50%;
+  border: 1px solid var(--glass-border); object-fit: cover;
+  background: var(--glass-bg-strong);
+}
+.avatar.lg { width: 84px; height: 84px; }
+
+/* ---------- Flash messages ---------- */
+.flash {
+  position: fixed; left: 50%; top: 18px; transform: translateX(-50%);
+  z-index: 100; min-width: 280px; max-width: 90vw;
+  padding: 12px 16px; border-radius: 14px;
+  background: var(--glass-bg-strong); border: 1px solid var(--glass-border);
+  backdrop-filter: blur(var(--glass-blur));
+  box-shadow: var(--shadow); animation: drop .25s ease;
+}
+.flash.success { border-color: var(--success); }
+.flash.error { border-color: var(--danger); }
+@keyframes drop { from { opacity: 0; transform: translate(-50%, -10px); } to { opacity: 1; transform: translate(-50%, 0); } }
+
+/* ---------- Pills / chips ---------- */
+.chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 12px; border-radius: 999px; font-size: .82rem;
+  background: var(--glass-bg); border: 1px solid var(--glass-border); color: var(--muted);
+}
+.chip:hover { color: var(--text); border-color: var(--accent); }
+.chip.active { color: var(--text); border-color: var(--accent); background: var(--glass-bg-strong); }
+
+/* ---------- Modal ---------- */
+.modal-backdrop {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(0,0,0,.5); backdrop-filter: blur(4px);
+  display: none; align-items: center; justify-content: center; padding: 18px;
+}
+.modal-backdrop.open { display: flex; }
+.modal {
+  width: min(640px, 100%);
+  background: var(--glass-bg-strong); border: 1px solid var(--glass-border);
+  border-radius: var(--radius); box-shadow: var(--shadow);
+  backdrop-filter: blur(var(--glass-blur)) saturate(150%);
+  padding: 22px; animation: drop .2s ease;
+}
+.modal h3 { margin: 0 0 12px; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 720px) {
+  .navbar { flex-wrap: wrap; }
+  .nav-search { order: 3; flex-basis: 100%; max-width: none; }
+  .grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+
+/* ---------- Misc ---------- */
+.empty {
+  text-align: center; padding: 48px 18px; color: var(--muted);
+  border: 1px dashed var(--glass-border); border-radius: var(--radius);
+}
+.skeleton {
+  background: linear-gradient(90deg, var(--glass-bg), var(--glass-bg-strong), var(--glass-bg));
+  background-size: 200% 100%; border-radius: var(--radius-sm);
+  animation: shimmer 1.3s infinite;
+}
+@keyframes shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+.breadcrumbs { color: var(--muted); font-size: .85rem; margin-bottom: 12px; }
+.breadcrumbs a:hover { color: var(--accent); }
+.kpi { display: flex; flex-direction: column; gap: 4px; }
+.kpi .n { font-size: 1.7rem; font-weight: 700; }
+.kpi .l { color: var(--muted); font-size: .85rem; }
+.tabs { display: flex; gap: 8px; flex-wrap: wrap; }
+hr.sep { border: none; border-top: 1px solid var(--glass-border); margin: 18px 0; }
+.code { font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-size: .85rem; }
+
+/* ============================================================
+   GlassTube — App components (app.css)
+   ============================================================ */
+
+/* ---------- Watch page ---------- */
+.watch-layout {
+  display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 22px;
+  align-items: start;
+}
+@media (max-width: 980px) { .watch-layout { grid-template-columns: 1fr; } }
+
+.player-wrap {
+  position: relative; border-radius: var(--radius); overflow: hidden;
+  border: 1px solid var(--glass-border);
+  background: #000; box-shadow: var(--shadow);
+}
+.player-wrap video { width: 100%; display: block; background: #000; aspect-ratio: 16/9; }
+
+.watch-title { font-size: 1.4rem; font-weight: 680; margin: 14px 0 6px; }
+.watch-sub { color: var(--muted); display: flex; gap: 10px; flex-wrap: wrap; align-items: center; font-size: .9rem; }
+
+.action-bar {
+  display: flex; gap: 10px; flex-wrap: wrap; margin: 14px 0; align-items: center;
+  padding: 10px 12px; border-radius: 16px;
+  background: var(--glass-bg); border: 1px solid var(--glass-border);
+  backdrop-filter: blur(var(--glass-blur));
+}
+.action-bar .btn.active { color: var(--accent); border-color: var(--ring); }
+
+.description-box {
+  margin-top: 12px; padding: 14px 16px; border-radius: 16px;
+  background: var(--glass-bg); border: 1px solid var(--glass-border);
+  white-space: pre-wrap; max-height: 220px; overflow: hidden; position: relative;
+}
+.description-box.expanded { max-height: none; }
+
+.side-card { padding: 14px 16px; margin-bottom: 16px; }
+.tag-list { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+
+/* ---------- AI assistant ---------- */
+.ai-panel {
+  padding: 16px; border-radius: 18px; margin-top: 16px;
+  background: linear-gradient(135deg, rgba(124,140,255,.14), rgba(67,198,255,.10));
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(var(--glass-blur));
+}
+.ai-panel h4 { margin: 0 0 8px; display: flex; align-items: center; gap: 8px; }
+.ai-result { margin-top: 12px; padding: 12px; border-radius: 12px; background: var(--glass-bg); border: 1px solid var(--glass-border); white-space: pre-wrap; }
+.ai-loading { opacity: .6; font-style: italic; }
+.ai-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+
+/* ---------- Comments ---------- */
+.comment-form textarea { min-height: 84px; }
+.comment {
+  display: flex; gap: 12px; padding: 12px 0; border-top: 1px solid var(--glass-border);
+}
+.comment .body { flex: 1; }
+.comment .body .name { font-weight: 600; font-size: .92rem; }
+.comment .body .time { color: var(--muted); font-size: .78rem; }
+.comment .body .text { margin-top: 4px; white-space: pre-wrap; }
+.comment.hidden-comment { opacity: .55; font-style: italic; }
+
+/* ---------- Tables (admin) ---------- */
+.table { width: 100%; border-collapse: collapse; }
+.table th, .table td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--glass-border); font-size: .9rem; }
+.table th { color: var(--muted); font-weight: 600; }
+.table tr:hover td { background: var(--glass-bg); }
+
+/* ---------- Auth / centered forms ---------- */
+.auth-wrap { max-width: 420px; margin: 40px auto; padding: 26px; }
+.auth-wrap h1 { font-size: 1.4rem; margin: 0 0 6px; }
+
+/* ---------- Channel header ---------- */
+.channel-head { display: flex; gap: 18px; align-items: center; padding: 18px; margin-bottom: 18px; }
+.channel-head .name { font-size: 1.4rem; font-weight: 700; }
+.channel-head .desc { color: var(--muted); }
+
+/* ---------- Range slider (quiet mode etc.) ---------- */
+input[type="range"] { accent-color: var(--accent); }
+.checkbox-row { display: flex; gap: 10px; align-items: flex-start; }
+.checkbox-row input { margin-top: 4px; }
+
+/* ---------- Utilities ---------- */
+.text-center { text-align: center; }
+.mt-0 { margin-top: 0; }
+.mt-1 { margin-top: 8px; }
+.mt-2 { margin-top: 16px; }
+.mb-1 { margin-bottom: 8px; }
+.flex { display: flex; }
+.gap-1 { gap: 8px; }
+.items-center { align-items: center; }
+.text-sm { font-size: .85rem; }
+.nowrap { white-space: nowrap; }
+
+/* Quiet mode hides secondary blocks */
+body.quiet .quiet-hide { display: none !important; }
+
+.flash{position:fixed}
+</style>
+</head>
+<body>
+<header class="container" id="nav"></header>
+<main class="container page" id="main"></main>
+<footer class="container" style="padding:28px 0;color:var(--muted);font-size:.85rem">
+  <div class="row"><span>GlassTube — спокойный видеохостинг.</span><span class="spacer"></span><a href="#/rules">Правила</a><a href="#/search">Поиск</a></div>
+</footer>
+<script>
+'use strict';
+/* GlassTube — standalone single-file edition.
+   Backend (PHP/MySQL) is replaced by a browser store (localStorage + IndexedDB for video files). */
+
+// ---------------------------------------------------------------- helpers
+const $ = (s, r = document) => r.querySelector(s);
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (m) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
+const now = () => Date.now();
+const fmtNum = (n) => n >= 1e6 ? (n / 1e6).toFixed(1).replace('.0', '') + ' млн' : n >= 1e3 ? (n / 1e3).toFixed(1).replace('.0', '') + ' тыс.' : String(n);
+const fmtDur = (s) => { s = Math.round(s || 0); const h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60), x = s % 60; const p = (n) => String(n).padStart(2, '0'); return h ? `${h}:${p(m)}:${p(x)}` : `${m}:${p(x)}`; };
+const fmtDate = (t) => new Date(t).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
+const slugify = (s) => String(s).toLowerCase().trim().replace(/[^a-z0-9а-яё]+/gi, '-').replace(/^-+|-+$/g, '') || 'item';
+const store = {
+  get(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (_) { return d; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { console.warn('storage', e); } },
+};
+const hash32 = (s) => { let h = 5381; for (let i = 0; i < s.length; i++) h = ((h << 5) + h + s.charCodeAt(i)) | 0; return 'h' + (h >>> 0).toString(16); };
+
+// ---------------------------------------------------------------- IndexedDB (video blobs)
+const idb = {
+  _db: null,
+  open() {
+    if (this._db) return this._db;
+    this._db = new Promise((res, rej) => {
+      try {
+        const r = indexedDB.open('glasstube', 1);
+        r.onupgradeneeded = () => r.result.createObjectStore('files');
+        r.onsuccess = () => res(r.result);
+        r.onerror = () => rej(r.error);
+      } catch (e) { rej(e); }
+    });
+    return this._db;
+  },
+  async put(k, blob) { const db = await this.open(); return new Promise((res, rej) => { const t = db.transaction('files', 'readwrite'); t.objectStore('files').put(blob, k); t.oncomplete = res; t.onerror = () => rej(t.error); }); },
+  async get(k) { const db = await this.open(); return new Promise((res, rej) => { const r = db.transaction('files').objectStore('files').get(k); r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error); }); },
+  async del(k) { try { const db = await this.open(); db.transaction('files', 'readwrite').objectStore('files').delete(k); } catch (_) {} },
+};
+
+// ---------------------------------------------------------------- data
+const CATS = [['education', 'Образование'], ['technology', 'Технологии'], ['music', 'Музыка'], ['film', 'Кино'], ['art', 'Искусство'], ['science', 'Наука'], ['lectures', 'Лекции'], ['reviews', 'Обзоры'], ['creativity', 'Творчество'], ['other', 'Другое']]
+  .map(([slug, name], i) => ({ id: i + 1, slug, name }));
+const catById = (id) => CATS.find((c) => c.id === Number(id));
+const catBySlug = (s) => CATS.find((c) => c.slug === s);
+
+let db;
+function seed() {
+  const t = now(), H = 3600e3;
+  const d = {
+    seq: 100,
+    users: [
+      { id: 1, username: 'admin', email: 'admin@glasstube.local', pass: hash32('admin1234'), role: 'admin', bio: 'Администратор GlassTube.', active: true, created: t - 30 * 24 * H },
+      { id: 2, username: 'demo', email: 'demo@glasstube.local', pass: hash32('demo1234'), role: 'user', bio: 'Демонстрационный автор.', active: true, created: t - 20 * 24 * H },
+    ],
+    channels: [
+      { id: 1, user_id: 1, name: 'GlassTube Official', slug: 'admin', description: 'Официальный канал платформы.' },
+      { id: 2, user_id: 2, name: 'Demo Studio', slug: 'demo', description: 'Спокойные видео о дизайне, музыке и науке.' },
+    ],
+    videos: [], comments: [], reports: [], ai: [], subs: [], saved: [], history: [], playlists: [], likes: [],
+    settings: { enable_ai: true, require_video_approval: false, video_max_mb: 1024, ai_daily_limit_auth: 100, registration_open: true },
+  };
+  const demos = [
+    ['Как устроен спокойный интерфейс', 'Разбираем принципы Liquid Glass и тихого дизайна: прозрачность, размытие, мягкие тени и отсутствие агрессивных паттернов удержания внимания.', 'technology', ['дизайн', 'код'], 120, 540, 2],
+    ['Лёгкая музыка для фокуса', 'Мягкий инструментальный сет для работы и отдыха.', 'music', ['музыка', 'калм'], 150, 312, 2],
+    ['Введение в астрономию', 'Короткая лекция о планетах и звёздах. Поговорим о Солнечной системе, галактиках и о том, как устроены наблюдения.', 'science', ['обучение', 'природа'], 180, 861, 2],
+    ['Рисуем утро на планшете', 'Расслабленный процесс цифровой живописи.', 'art', ['творчество', 'дизайн'], 210, 97, 2],
+    ['Обзор спокойных приложений', 'Что помогает не отвлекаться в течение дня.', 'reviews', ['обучение'], 240, 455, 2],
+    ['Добро пожаловать в GlassTube', 'Короткий тур по платформе: загрузка, плейлисты, подписки и ИИ-помощник.', 'education', ['обучение', 'калм'], 95, 1280, 1],
+    ['Тихий лес: звуки природы', 'Записи леса на рассвете. Без музыки, только шорох листвы и птицы.', 'other', ['природа', 'калм'], 600, 233, 1],
+  ];
+  demos.forEach((v, i) => {
+    d.videos.push({
+      id: i + 1, user_id: v[6], channel_id: v[6], category_id: CATS.find((c) => c.slug === v[2]).id, title: v[0], description: v[1], tags: v[3],
+      visibility: 'public', status: 'published', views: v[5], duration: v[4], created: t - i * 5 * H, hue: (i * 47 + 220) % 360, file: false,
+    });
+  });
+  d.comments.push(
+    { id: 1, video_id: 1, user_id: 1, body: 'Отличный разбор! Хочется больше таких видео.', status: 'visible', created: t - 3 * H },
+    { id: 2, video_id: 1, user_id: 2, body: 'Спасибо, рад, что понравилось.', status: 'visible', created: t - 2 * H },
+    { id: 3, video_id: 3, user_id: 1, body: 'Очень понятно объяснено.', status: 'visible', created: t - 5 * H },
+  );
+  d.seq = 100;
+  return d;
+}
+function load() { db = store.get('gt-db', null); if (!db || !db.users) { db = seed(); save(); } }
+function save() { store.set('gt-db', db); }
+const nid = () => ++db.seq;
+
+// session
+let meId = store.get('gt-session', null);
+const me = () => db.users.find((u) => u.id === meId && u.active) || null;
+const isAdmin = () => me()?.role === 'admin';
+const chanOf = (v) => db.channels.find((c) => c.id === v.channel_id) || { name: '—', slug: '' };
+const userById = (id) => db.users.find((u) => u.id === id);
+const chanByUser = (uid) => db.channels.find((c) => c.user_id === uid);
+const videoById = (id) => db.videos.find((v) => v.id === Number(id));
+
+// ---------------------------------------------------------------- visuals
+const AVATAR = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#7c8cff"/><stop offset="100%" stop-color="#43c6ff"/></linearGradient></defs><rect width="120" height="120" rx="60" fill="url(#g)"/><circle cx="60" cy="48" r="22" fill="#ffffff" opacity="0.92"/><path d="M36 98 q24 -28 48 0" fill="#ffffff" opacity="0.92"/></svg>');
+function thumbOf(v) {
+  if (v.thumb) return v.thumb;
+  const a = v.hue, b = (v.hue + 50) % 360;
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="hsl(${a} 60% 38%)"/><stop offset="1" stop-color="hsl(${b} 70% 22%)"/></linearGradient></defs><rect width="320" height="180" fill="url(#g)"/><circle cx="260" cy="36" r="64" fill="rgba(255,255,255,.08)"/><circle cx="50" cy="160" r="84" fill="rgba(255,255,255,.06)"/><text x="16" y="164" font-family="sans-serif" font-size="15" fill="rgba(255,255,255,.88)">${esc(v.title.slice(0, 30))}</text></svg>`;
+  return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+}
+const card = (v) => `<a class="video-card" href="#/watch/${v.id}"><div class="thumb"><img src="${thumbOf(v)}" alt="" loading="lazy">${v.duration ? `<span class="duration">${fmtDur(v.duration)}</span>` : ''}</div><div class="meta"><div class="title">${esc(v.title)}</div><div class="sub">${esc(chanOf(v).name)} · ${fmtNum(v.views)} просм.</div>${v.category_id ? `<div class="sub"><span class="badge">${esc(catById(v.category_id)?.name || '')}</span></div>` : ''}</div></a>`;
+const grid = (list) => `<div class="grid">${list.map(card).join('')}</div>`;
+
+// ---------------------------------------------------------------- queries
+const catalog = () => db.videos.filter((v) => v.visibility === 'public' && v.status === 'published').sort((a, b) => b.created - a.created);
+const likeCount = (id) => db.likes.filter((l) => l.video_id === id).length;
+const allTags = () => [...new Set(db.videos.flatMap((v) => v.tags))];
+const flashQ = [];
+
+// ---------------------------------------------------------------- AI (mock provider, same logic as MockAiProvider.php)
+function aiAllowed() {
+  const s = db.settings;
+  if (!s.enable_ai) { toast('ИИ-помощник отключён администратором.', 'error'); return false; }
+  const day = new Date().toDateString();
+  const uid = me()?.id || 0;
+  const used = db.ai.filter((a) => a.user_id === uid && new Date(a.ts).toDateString() === day).length;
+  const limit = me() ? Number(s.ai_daily_limit_auth) : 10;
+  if (used >= limit) { toast('Дневной лимит ИИ-запросов исчерпан.', 'error'); return false; }
+  return true;
+}
+const aiLog = (task) => { db.ai.push({ id: nid(), user_id: me()?.id || 0, task, provider: 'mock', status: 'ok', ts: now() }); save(); };
+const STOP = ['и', 'в', 'на', 'с', 'по', 'для', 'это', 'как', 'что', 'the', 'a', 'of', 'to', 'is', 'не', 'но', 'или', 'из', 'за', 'от', 'о', 'об', 'к'];
+function aiSuggestTags(text) {
+  const freq = {};
+  text.toLowerCase().replace(/[^a-zа-яё0-9\s]/gi, ' ').split(/\s+/).filter((w) => w.length > 3 && !STOP.includes(w)).forEach((w) => { freq[w] = (freq[w] || 0) + 1; });
+  return Object.entries(freq).sort((a, b) => b[1] - a[1]).slice(0, 5).map((e) => e[0]);
+}
+function aiModerate(text) {
+  const t = text.toLowerCase();
+  return !['spam', 'http://', 'https://', 'купить', 'casino', 'xxx', 'сука', 'идиот'].some((w) => t.includes(w));
+}
+
+// ---------------------------------------------------------------- UI plumbing
+function toast(text, type = 'success') {
+  document.querySelectorAll('.flash').forEach((x) => x.remove());
+  const el = document.createElement('div');
+  el.className = 'flash ' + type; el.textContent = text;
+  document.body.appendChild(el);
+  setTimeout(() => { el.style.opacity = '0'; setTimeout(() => el.remove(), 300); }, 3500);
+}
+const go = (p) => { const t = '#' + p; if (location.hash === t) render(); else location.hash = t; };
+function parseHash() {
+  const raw = location.hash.slice(1) || '/';
+  const [path, qs = ''] = raw.split('?');
+  return { parts: path.split('/').filter(Boolean), q: new URLSearchParams(qs) };
+}
+const crumbs = (...items) => `<div class="breadcrumbs"><a href="#/">Главная</a> / ${items.join(' / ')}</div>`;
+const empty = (t) => `<div class="empty">${t}</div>`;
+
+function navHtml() {
+  const u = me();
+  const q = parseHash().q.get('q') || '';
+  const theme = document.documentElement.getAttribute('data-theme');
+  return `<nav class="navbar">
+    <a class="brand" href="#/"><span class="dot"></span> GlassTube</a>
+    <form class="nav-search" data-form="navsearch"><input class="input" type="search" name="q" placeholder="Спокойный поиск видео…" value="${esc(q)}"></form>
+    <div class="nav-links">
+      <button class="btn btn-sm btn-ghost" data-action="theme" title="Тема">${theme === 'light' ? '🌙' : '☀️'}</button>
+      ${u ? `<a href="#/upload">Загрузить</a><a href="#/subscriptions">Подписки</a><a href="#/history">История</a>
+        ${isAdmin() ? '<a href="#/admin">Админ</a>' : ''}<a href="#/settings">${esc(u.username)}</a>
+        <button class="btn btn-sm" data-action="logout">Выйти</button>`
+        : `<a href="#/login">Вход</a><a class="btn btn-sm btn-primary" href="#/register">Регистрация</a>`}
+    </div></nav>`;
+}
+
+// ---------------------------------------------------------------- views
+function vHome(q) {
+  const u = me();
+  const page = Math.max(1, Number(q.get('page')) || 1), per = 12;
+  const all = catalog(), newer = all.slice(0, page * per), more = all.length > page * per;
+  const popular = [...all].sort((a, b) => b.views - a.views).slice(0, 8);
+  let cont = [];
+  if (u) cont = db.history.filter((h) => h.user_id === u.id && h.progress > 5 && h.progress < (h.duration || 1e9) - 5).sort((a, b) => b.ts - a.ts).map((h) => videoById(h.video_id)).filter((v) => v && v.status === 'published').slice(0, 4);
+  return { title: 'GlassTube', html: `
+    ${cont.length ? `<section class="section"><div class="section-head"><h2 class="section-title">Продолжить просмотр</h2></div>${grid(cont)}</section>` : ''}
+    <section class="section"><div class="section-head"><h2 class="section-title">Новое</h2><a class="chip" href="#/search">Все видео →</a></div>
+      ${newer.length ? grid(newer) : empty('Пока нет видео.')}
+      ${more ? `<div class="text-center mt-2"><a class="btn" href="#/?page=${page + 1}">Загрузить ещё</a></div>` : ''}</section>
+    <section class="section"><div class="section-head"><h2 class="section-title">Категории</h2></div>
+      <div class="row">${CATS.map((c) => `<a class="chip" href="#/category/${c.slug}">${esc(c.name)}</a>`).join('')}</div></section>
+    <section class="section"><div class="section-head"><h2 class="section-title">Популярное</h2></div>${popular.length ? grid(popular) : empty('Пока пусто.')}</section>` };
+}
+
+function vSearch(q) {
+  const term = (q.get('q') || '').trim(), cat = q.get('category') || '', sort = q.get('sort') || 'relevance', useAi = q.get('ai') === '1';
+  let results = [], explanation = '';
+  if (term) {
+    let tokens = term.toLowerCase().split(/\s+/).filter(Boolean);
+    if (useAi && aiAllowed()) {
+      aiLog('search');
+      tokens = tokens.map((t) => (t.length > 5 ? t.slice(0, -2) : t));
+      explanation = 'Ищем по смыслу: ' + tokens.join(', ') + ' (учтены словоформы).';
+    }
+    results = catalog().map((v) => {
+      const ch = chanOf(v).name.toLowerCase();
+      let s = 0;
+      tokens.forEach((t) => { if (v.title.toLowerCase().includes(t)) s += 3; if (v.tags.some((g) => g.toLowerCase().includes(t))) s += 2; if (v.description.toLowerCase().includes(t)) s += 1; if (ch.includes(t)) s += 1; });
+      return { v, s };
+    }).filter((r) => r.s > 0 && (!cat || String(r.v.category_id) === cat));
+    results.sort((a, b) => sort === 'new' ? b.v.created - a.v.created : sort === 'popular' ? b.v.views - a.v.views : b.s - a.s || b.v.created - a.v.created);
+    results = results.map((r) => r.v);
+  }
+  return { title: 'Поиск — GlassTube', html: `${crumbs('Поиск')}<h1 class="section-title">Поиск</h1>
+    <form data-form="search" class="glass-strong" style="padding:16px;margin-bottom:18px">
+      <div class="row"><input class="input" type="search" name="q" value="${esc(term)}" placeholder="Что хотите посмотреть?" style="flex:1"><button class="btn btn-primary" type="submit">Найти</button></div>
+      <div class="row mt-1">
+        <label class="chip">Категория: <select class="input" name="category" style="width:auto;display:inline-block;margin-left:6px" data-autosubmit><option value="">Все</option>${CATS.map((c) => `<option value="${c.id}" ${String(c.id) === cat ? 'selected' : ''}>${esc(c.name)}</option>`).join('')}</select></label>
+        <label class="chip">Сортировка: <select class="input" name="sort" style="width:auto;display:inline-block;margin-left:6px" data-autosubmit>${[['relevance', 'По релевантности'], ['new', 'Новые'], ['popular', 'Популярные']].map(([k, n]) => `<option value="${k}" ${sort === k ? 'selected' : ''}>${n}</option>`).join('')}</select></label>
+        <label class="chip"><input type="checkbox" name="ai" value="1" ${useAi ? 'checked' : ''} data-autosubmit> ИИ-поиск</label>
+      </div></form>
+    ${term && explanation ? `<div class="ai-panel"><strong>ИИ уточнил запрос:</strong> ${esc(explanation)}</div>` : ''}
+    ${term ? `<p class="muted">Найдено видео: ${results.length}</p>${results.length ? `<div class="mt-1">${grid(results)}</div>` : empty('Ничего не нашлось. Попробуйте другие слова или категорию.')}` : empty('Введите запрос, чтобы начать спокойный поиск.')}` };
+}
+
+function vCategory(slug) {
+  const c = catBySlug(slug); if (!c) return v404();
+  const list = catalog().filter((v) => v.category_id === c.id);
+  return { title: c.name + ' — GlassTube', html: `${crumbs(esc(c.name))}<h1 class="section-title">${esc(c.name)}</h1>${list.length ? grid(list) : empty('В этой категории пока нет видео.')}` };
+}
+function vTag(slug) {
+  const tag = allTags().find((t) => slugify(t) === slug); if (!tag) return v404();
+  const list = catalog().filter((v) => v.tags.includes(tag));
+  return { title: '#' + tag + ' — GlassTube', html: `${crumbs('#' + esc(tag))}<h1 class="section-title">#${esc(tag)}</h1>${list.length ? grid(list) : empty('Нет видео с этим тегом.')}` };
+}
+
+function vChannel(slug) {
+  const ch = db.channels.find((c) => c.slug === slug); if (!ch) return v404();
+  const u = me(), own = u && u.id === ch.user_id;
+  const subs = db.subs.filter((s) => s.channel_id === ch.id).length;
+  const list = db.videos.filter((v) => v.channel_id === ch.id && (own || isAdmin() || (v.visibility === 'public' && v.status === 'published'))).sort((a, b) => b.created - a.created);
+  const subscribed = u && db.subs.some((s) => s.user_id === u.id && s.channel_id === ch.id);
+  return { title: ch.name + ' — GlassTube', html: `${crumbs(esc(ch.name))}
+    <div class="glass channel-head"><img class="avatar lg" src="${AVATAR}" alt="">
+      <div style="flex:1"><div class="name">${esc(ch.name)}</div><div class="desc">${esc(ch.description || '')}</div><div class="muted text-sm">${subs} подписчиков · ${list.length} видео</div></div>
+      ${own ? `<a class="btn btn-sm" href="#/settings">Редактировать</a>` : u ? `<button class="btn btn-sm ${subscribed ? 'active' : ''}" data-action="subscribe" data-id="${ch.id}">${subscribed ? '✓ Вы подписаны' : '＋ Подписаться'}</button>` : `<a class="btn btn-sm" href="#/login">＋ Подписаться</a>`}
+    </div>
+    ${list.length ? `<div class="grid">${list.map((v) => card(v)).join('')}</div>` : empty('На канале пока нет видео.')}` };
+}
+
+function vWatch(id) {
+  const v = videoById(id); const u = me();
+  if (!v) return v404();
+  const own = u && u.id === v.user_id;
+  if (v.visibility === 'private' && !own && !isAdmin()) return v404();
+  if (v.status !== 'published' && !own && !isAdmin()) return v404();
+  const ch = chanOf(v);
+  const liked = u && db.likes.some((l) => l.user_id === u.id && l.video_id === v.id);
+  const saved = u && db.saved.some((s) => s.user_id === u.id && s.video_id === v.id);
+  const subscribed = u && db.subs.some((s) => s.user_id === u.id && s.channel_id === v.channel_id);
+  const note = { processing: 'Видео обрабатывается и пока не видно в каталоге.', pending_review: 'Видео на проверке модератором.', blocked: 'Видео заблокировано.' };
+  const comments = db.comments.filter((c) => c.video_id === v.id && (c.status === 'visible' || isAdmin() || own)).sort((a, b) => b.created - a.created);
+  const similar = catalog().filter((x) => x.id !== v.id).map((x) => ({ x, s: (x.category_id === v.category_id ? 2 : 0) + x.tags.filter((t) => v.tags.includes(t)).length })).sort((a, b) => b.s - a.s || b.x.created - a.x.created).slice(0, 6).map((r) => r.x);
+  const aiOn = db.settings.enable_ai;
+  const playlists = u ? db.playlists.filter((p) => p.user_id === u.id) : [];
+  const poster = thumbOf(v);
+  const player = v.file
+    ? `<video id="gt-player" data-video-id="${v.id}" controls preload="metadata" poster="${poster}">Ваш браузер не поддерживает видео.</video>`
+    : `<div style="aspect-ratio:16/9;background:#000 url('${poster}') center/cover;display:flex;align-items:center;justify-content:center"><div class="glass-strong" style="padding:14px 20px;text-align:center"><div style="font-size:2rem">▶</div><div class="muted text-sm">Демо-видео: файл не прикреплён</div></div></div>`;
+  return { title: v.title + ' — GlassTube', after: 'watch', videoId: v.id, html: `
+    ${crumbs(`<a href="#/channel/${esc(ch.slug)}">${esc(ch.name)}</a>`, esc(v.title))}
+    <div class="watch-layout"><div>
+      <div class="player-wrap">${player}</div>
+      <h1 class="watch-title">${esc(v.title)}</h1>
+      <div class="watch-sub"><span>${esc(ch.name)}</span><span>· ${fmtNum(v.views)} просмотров</span><span>· ${fmtDate(v.created)}</span>
+        ${v.category_id ? `<span class="badge">${esc(catById(v.category_id).name)}</span>` : ''}
+        ${v.status !== 'published' ? `<span class="badge" style="color:var(--warning)">${esc(note[v.status] || v.status)}</span>` : ''}
+        ${v.visibility !== 'public' ? `<span class="badge">${v.visibility === 'private' ? 'Приватное' : 'По ссылке'}</span>` : ''}</div>
+      <div class="action-bar">
+        ${u ? `<button class="btn btn-sm ${liked ? 'active' : ''}" data-action="like" data-id="${v.id}">${liked ? '❤️' : '🤍'} <span>${fmtNum(likeCount(v.id))}</span></button>
+          <button class="btn btn-sm ${saved ? 'active' : ''}" data-action="save" data-id="${v.id}">${saved ? '🔖 Сохранено' : '🔖 Сохранить'}</button>
+          ${playlists.length ? `<select class="input" data-action-change="addpl" data-id="${v.id}" style="width:auto;padding:7px 10px"><option value="">В плейлист…</option>${playlists.map((p) => `<option value="${p.id}">${esc(p.name)}</option>`).join('')}</select>` : ''}
+          ${!own ? `<button class="btn btn-sm ${subscribed ? 'active' : ''}" data-action="subscribe" data-id="${v.channel_id}">${subscribed ? '✓ Вы подписаны' : '＋ Подписаться'}</button>` : `<a class="btn btn-sm" href="#/video/${v.id}/edit">✎ Изменить</a>`}
+          <button class="btn btn-sm" data-action="report-open" data-type="video" data-id="${v.id}">⚑ Пожаловаться</button>`
+          : `<a class="btn btn-sm" href="#/login">🤍 Лайк</a><a class="btn btn-sm" href="#/login">🔖 Сохранить</a>`}
+        <span class="spacer"></span><button class="btn btn-sm" data-action="quiet">🔈 Тихий режим</button>
+      </div>
+      <div class="description-box" id="desc-box">${esc(v.description || 'Описание отсутствует.')}</div>
+      ${(v.description || '').length > 180 ? `<button class="btn btn-sm btn-ghost mt-1" data-action="desc-toggle">Показать полностью</button>` : ''}
+      ${v.tags.length ? `<div class="tag-list">${v.tags.map((t) => `<a class="chip" href="#/tag/${encodeURIComponent(slugify(t))}">#${esc(t)}</a>`).join('')}</div>` : ''}
+      <div class="ai-panel quiet-hide"><h4>✨ ИИ-помощник</h4>
+        ${!aiOn ? '<p class="muted text-sm">ИИ-помощник временно отключён администратором.</p>' : `<p class="muted text-sm">Пусть ИИ кратко объяснит содержание и поможет найти похожее.</p>
+        <div class="ai-actions"><button class="btn btn-sm" data-action="ai-summarize" data-id="${v.id}">Суммировать</button><button class="btn btn-sm" data-action="ai-summarize" data-id="${v.id}">Объяснить тему</button><button class="btn btn-sm" data-action="ai-similar" data-id="${v.id}">Похожие видео</button></div><div id="ai-result"></div>`}</div>
+      <section class="section quiet-hide"><div class="section-head"><h2 class="section-title">Комментарии (${comments.length})</h2></div>
+        ${u ? `<form class="comment-form glass" data-form="comment" data-id="${v.id}" style="padding:14px"><div class="field" style="margin:0"><textarea class="input" name="body" placeholder="Поделитесь мыслями спокойно и дружелюбно…" required></textarea></div><div class="mt-1" style="text-align:right"><button class="btn btn-primary btn-sm" type="submit">Отправить</button></div></form>`
+          : `<p class="muted"><a href="#/login">Войдите</a>, чтобы оставить комментарий.</p>`}
+        <div id="comment-list">${comments.length ? comments.map((c) => {
+          const au = userById(c.user_id), ac = au && chanByUser(au.id);
+          const can = u && (isAdmin() || own || c.user_id === u.id);
+          return `<div class="comment ${c.status !== 'visible' ? 'hidden-comment' : ''}"><img class="avatar" src="${AVATAR}" alt=""><div class="body"><div class="name">${esc(ac?.name || au?.username || 'Удалён')} <span class="time">${fmtDate(c.created)}</span></div><div class="text">${esc(c.body)}</div>${c.status !== 'visible' ? '<div class="muted text-sm">Комментарий скрыт модерацией.</div>' : ''}${can ? `<button class="btn btn-sm btn-ghost mt-1" data-action="delete-comment" data-id="${c.id}">Удалить</button>` : ''}${u && c.user_id !== u.id ? `<button class="btn btn-sm btn-ghost mt-1" data-action="report-open" data-type="comment" data-id="${c.id}">⚑</button>` : ''}</div></div>`;
+        }).join('') : '<p class="muted">Пока нет комментариев. Будьте первым.</p>'}</div>
+      </section>
+    </div>
+    <aside>
+      <div class="side-card glass"><div class="flex items-center gap-1"><img class="avatar lg" src="${AVATAR}" alt=""><div><div style="font-weight:650"><a href="#/channel/${esc(ch.slug)}">${esc(ch.name)}</a></div><div class="muted text-sm">Канал</div></div></div><a class="btn btn-sm btn-ghost mt-1" style="width:100%;justify-content:center" href="#/channel/${esc(ch.slug)}">Открыть канал</a></div>
+      <div class="side-card glass"><div class="section-title" style="font-size:1rem">Похожие видео</div>
+        ${similar.length ? similar.map((s) => `<a class="flex gap-1 mt-1" href="#/watch/${s.id}" style="align-items:center"><div class="thumb" style="width:120px;flex:0 0 120px"><img src="${thumbOf(s)}" alt=""></div><div style="font-size:.85rem">${esc(s.title)}<div class="muted">${esc(chanOf(s).name)}</div></div></a>`).join('') : '<p class="muted text-sm mt-1">Нет похожих.</p>'}</div>
+    </aside></div>
+    <div class="modal-backdrop" id="report-modal"><div class="modal"><h3>Пожаловаться</h3><form data-form="report"><input type="hidden" name="target_type"><input type="hidden" name="target_id">
+      <div class="field"><label>Причина</label><select class="input" name="reason" required><option value="spam">Спам</option><option value="insult">Оскорбления</option><option value="copyright">Нарушение авторских прав</option><option value="inappropriate">Неприемлемый контент</option><option value="other">Другое</option></select></div>
+      <div class="field"><label>Подробности (необязательно)</label><textarea class="input" name="details" maxlength="1000"></textarea></div>
+      <div class="row mt-1"><button type="submit" class="btn btn-primary btn-sm">Отправить</button><button type="button" class="btn btn-sm" data-action="report-close">Отмена</button></div></form></div></div>` };
+}
+
+function vAuth(kind) {
+  const reg = kind === 'register';
+  if (reg && !db.settings.registration_open) return { title: 'Регистрация', html: `<div class="glass-strong auth-wrap"><h1>Регистрация закрыта</h1><p class="muted">Администратор временно отключил регистрацию.</p></div>` };
+  return { title: (reg ? 'Регистрация' : 'Вход') + ' — GlassTube', html: `<div class="glass-strong auth-wrap"><h1>${reg ? 'Создать аккаунт' : 'Вход'}</h1><p class="muted">${reg ? 'Присоединяйтесь к спокойному видеохостингу.' : 'Рады видеть вас снова.'}</p>
+    <form data-form="${kind}">
+      ${reg ? `<div class="field"><label>Логин (латиница, цифры, _)</label><input class="input" name="username" required minlength="3" maxlength="30" pattern="[A-Za-z0-9_]+"></div><div class="field"><label>Email</label><input class="input" type="email" name="email" required></div>`
+        : `<div class="field"><label>Логин или email</label><input class="input" name="login" required></div>`}
+      <div class="field"><label>Пароль${reg ? ' (минимум 8 символов)' : ''}</label><input class="input" type="password" name="password" required ${reg ? 'minlength="8"' : ''}></div>
+      <button class="btn btn-primary" style="width:100%;justify-content:center" type="submit">${reg ? 'Зарегистрироваться' : 'Войти'}</button>
+    </form>
+    <p class="muted text-sm mt-2">${reg ? 'Уже есть аккаунт? <a href="#/login">Войти</a>' : 'Нет аккаунта? <a href="#/register">Регистрация</a>'}</p>
+    ${reg ? '' : '<p class="muted text-sm">Демо: <span class="code">demo / demo1234</span> · админ: <span class="code">admin / admin1234</span></p>'}</div>` };
+}
+
+function vUpload() {
+  const s = db.settings;
+  return { title: 'Загрузка — GlassTube', html: `<div class="glass-strong" style="max-width:720px;margin:0 auto;padding:24px"><h1 style="margin-top:0">Загрузка видео</h1>
+    <p class="muted">Поддерживаются форматы mp4, webm, до ${s.video_max_mb} МБ. Файл сохраняется в вашем браузере.</p>
+    <div class="ai-panel quiet-hide"><h4>✨ ИИ-помощник</h4><p class="muted text-sm">Пусть ИИ улучшит название, описание и подберёт теги.</p>
+      <div class="ai-actions"><button type="button" class="btn btn-sm" data-action="ai-meta">Сгенерировать метаданные</button><button type="button" class="btn btn-sm" data-action="ai-tags">Предложить теги</button></div><div id="ai-meta-result"></div></div>
+    <form data-form="upload" class="mt-2">
+      <div class="field"><label>Видеофайл</label><input class="input" type="file" name="file" accept="video/mp4,video/webm" required></div>
+      <div class="field"><label>Название</label><input class="input" id="u-title" name="title" maxlength="160" required></div>
+      <div class="field"><label>Описание</label><textarea class="input" id="u-desc" name="description" maxlength="4000"></textarea></div>
+      <div class="field"><label>Категория</label><select class="input" name="category_id"><option value="">— без категории —</option>${CATS.map((c) => `<option value="${c.id}">${esc(c.name)}</option>`).join('')}</select></div>
+      <div class="field"><label>Теги (через запятую)</label><input class="input" id="u-tags" name="tags" placeholder="дизайн, музыка, обучение"></div>
+      <div class="field"><label>Видимость</label><select class="input" name="visibility"><option value="public" selected>Публичное</option><option value="unlisted">Ссылка (unlisted)</option><option value="private">Приватное</option></select></div>
+      <div class="field checkbox-row"><input type="checkbox" name="rights" id="rights" required><label for="rights" style="color:var(--text)">Я обладаю правами на это видео или имею разрешение на его публикацию.</label></div>
+      <div id="upload-error" style="color:var(--danger)"></div>
+      <button class="btn btn-primary" type="submit" style="width:100%;justify-content:center">Загрузить видео</button></form></div>` };
+}
+
+function vVideoEdit(id) {
+  const v = videoById(id), u = me();
+  if (!v || !(u.id === v.user_id || isAdmin())) return v404();
+  return { title: 'Изменить видео', html: `${crumbs(`<a href="#/watch/${v.id}">${esc(v.title)}</a>`, 'Изменить')}<div class="glass-strong" style="max-width:720px;padding:24px"><h1 style="margin-top:0">Изменить видео</h1>
+    <form data-form="videoedit" data-id="${v.id}">
+      <div class="field"><label>Название</label><input class="input" name="title" value="${esc(v.title)}" required maxlength="160"></div>
+      <div class="field"><label>Описание</label><textarea class="input" name="description">${esc(v.description)}</textarea></div>
+      <div class="field"><label>Категория</label><select class="input" name="category_id"><option value="">— без категории —</option>${CATS.map((c) => `<option value="${c.id}" ${c.id === v.category_id ? 'selected' : ''}>${esc(c.name)}</option>`).join('')}</select></div>
+      <div class="field"><label>Теги</label><input class="input" name="tags" value="${esc(v.tags.join(', '))}"></div>
+      <div class="field"><label>Видимость</label><select class="input" name="visibility">${[['public', 'Публичное'], ['unlisted', 'Ссылка (unlisted)'], ['private', 'Приватное']].map(([k, n]) => `<option value="${k}" ${v.visibility === k ? 'selected' : ''}>${n}</option>`).join('')}</select></div>
+      <div class="row"><button class="btn btn-primary" type="submit">Сохранить</button><button class="btn btn-danger" type="button" data-action="video-delete" data-id="${v.id}">Удалить видео</button></div></form></div>` };
+}
+
+function vSettings() {
+  const u = me(), ch = chanByUser(u.id), pls = db.playlists.filter((p) => p.user_id === u.id);
+  return { title: 'Настройки — GlassTube', html: `${crumbs('Настройки')}<h1 class="section-title">Настройки профиля</h1>
+    <div class="glass-strong" style="padding:22px;max-width:720px"><form data-form="settings">
+      <div class="field"><label>Логин</label><input class="input" value="${esc(u.username)}" disabled></div>
+      <div class="field"><label>Email</label><input class="input" value="${esc(u.email)}" disabled></div>
+      <div class="field"><label>О себе</label><textarea class="input" name="bio" maxlength="500">${esc(u.bio || '')}</textarea></div><hr class="sep">
+      <h3 style="margin:0 0 8px">Канал</h3>
+      <div class="field"><label>Название канала</label><input class="input" name="channel_name" maxlength="80" value="${esc(ch.name)}" required></div>
+      <div class="field"><label>Описание канала</label><textarea class="input" name="channel_description" maxlength="1000">${esc(ch.description || '')}</textarea></div><hr class="sep">
+      <h3 style="margin:0 0 8px">Смена пароля</h3>
+      <div class="field"><label>Текущий пароль</label><input class="input" type="password" name="current_password"></div>
+      <div class="field"><label>Новый пароль (минимум 8 символов)</label><input class="input" type="password" name="new_password" minlength="8"></div>
+      <button class="btn btn-primary" type="submit">Сохранить</button></form></div>
+    <div class="glass-strong mt-2" style="padding:22px;max-width:720px"><h3 style="margin:0 0 8px">Плейлисты</h3>
+      <form class="row" data-form="plcreate"><input class="input" name="name" placeholder="Название плейлиста" required style="flex:1"><select class="input" name="visibility" style="width:auto"><option value="private">Приватный</option><option value="public">Публичный</option></select><button class="btn btn-primary" type="submit">Создать</button></form>
+      <ul style="list-style:none;padding:0;margin:8px 0 0"><li class="row" style="padding:8px 0;border-top:1px solid var(--glass-border)"><a href="#/playlist/later">Смотреть позже</a><span class="spacer"></span><span class="muted text-sm">${db.saved.filter((s) => s.user_id === u.id).length} видео · авто</span></li>
+      ${pls.map((p) => `<li class="row" style="padding:8px 0;border-top:1px solid var(--glass-border)"><a href="#/playlist/${p.id}">${esc(p.name)}</a><span class="spacer"></span><span class="muted text-sm">${p.items.length} видео · ${p.visibility === 'public' ? 'публичный' : 'приватный'}</span></li>`).join('')}</ul></div>` };
+}
+
+function vPlaylist(id) {
+  const u = me();
+  if (id === 'later') {
+    if (!u) return vAuth('login');
+    const list = db.saved.filter((s) => s.user_id === u.id).map((s) => videoById(s.video_id)).filter(Boolean);
+    return { title: 'Смотреть позже', html: `${crumbs('Смотреть позже')}<h1 class="section-title">Смотреть позже</h1>${list.length ? grid(list) : empty('Здесь появятся сохранённые видео.')}` };
+  }
+  const p = db.playlists.find((x) => x.id === Number(id));
+  if (!p || (p.visibility === 'private' && p.user_id !== u?.id)) return v404();
+  const list = p.items.map(videoById).filter(Boolean), own = u && u.id === p.user_id;
+  return { title: p.name, html: `${crumbs(esc(p.name))}<div class="section-head"><h1 class="section-title">${esc(p.name)}</h1>${own ? `<button class="btn btn-sm btn-danger" data-action="pl-delete" data-id="${p.id}">Удалить плейлист</button>` : ''}</div>
+    ${list.length ? `<div class="grid">${list.map((v) => `<div>${card(v)}${own ? `<button class="btn btn-sm btn-ghost mt-1" data-action="pl-remove" data-id="${p.id}" data-video="${v.id}">Убрать из плейлиста</button>` : ''}</div>`).join('')}</div>` : empty('Плейлист пуст.')}` };
+}
+
+function vSubs() {
+  const u = me(), ids = db.subs.filter((s) => s.user_id === u.id).map((s) => s.channel_id);
+  const chans = db.channels.filter((c) => ids.includes(c.id)), list = catalog().filter((v) => ids.includes(v.channel_id));
+  return { title: 'Подписки', html: `${crumbs('Подписки')}<h1 class="section-title">Подписки</h1>
+    ${chans.length ? `<div class="row" style="margin-bottom:18px">${chans.map((c) => `<a class="chip" href="#/channel/${esc(c.slug)}">${esc(c.name)}</a>`).join('')}</div>${list.length ? grid(list) : empty('У ваших каналов пока нет видео.')}` : empty('Вы пока ни на кого не подписаны.')}` };
+}
+function vHistory() {
+  const u = me(), list = db.history.filter((h) => h.user_id === u.id).sort((a, b) => b.ts - a.ts).map((h) => videoById(h.video_id)).filter((v) => v && (v.status === 'published'));
+  return { title: 'История', html: `${crumbs('История')}<div class="section-head"><h1 class="section-title">История просмотров</h1>${list.length ? '<button class="btn btn-sm btn-ghost" data-action="history-clear">Очистить</button>' : ''}</div>${list.length ? grid(list) : empty('История пуста.')}` };
+}
+function vRules() {
+  return { title: 'Правила', html: `${crumbs('Правила')}<div class="glass-strong" style="max-width:760px;padding:24px"><h1 style="margin-top:0">Правила сообщества GlassTube</h1>
+    <p>GlassTube — спокойное место для просмотра и обмена видео. Мы ценим уважение, честность и авторские права.</p><h3>Основные принципы</h3>
+    <ul><li>Не загружайте контент, на который не имеете прав.</li><li>Уважайте других: без оскорблений, травли и ненависти.</li><li>Не публикуйте спам, вредоносные ссылки и рекламу.</li><li>Не используйте платформу для незаконного контента.</li></ul>
+    <h3>Авторские права</h3><p>Загружая видео, вы подтверждаете, что обладаете правами на него или имеете разрешение автора. При нарушении авторских прав видео может быть заблокировано по жалобе правообладателя.</p>
+    <h3>Модерация</h3><p>Комментарии проверяются ИИ-модерацией и администраторами. Скрытые или нарушающие правила комментарии удаляются. Жалобы рассматриваются в админ-панели.</p></div>` };
+}
+function v404() { return { title: '404', html: `<div class="glass-strong" style="max-width:520px;margin:40px auto;padding:30px;text-align:center"><h1 style="margin-top:0">404</h1><p class="muted">Такой страницы нет.</p><a class="btn btn-primary" href="#/">На главную</a></div>` }; }
+
+// admin
+const tbl = (head, rows) => `<div class="glass" style="padding:8px;overflow-x:auto"><table class="table"><thead><tr>${head.map((h) => `<th>${h}</th>`).join('')}</tr></thead><tbody>${rows.join('') || `<tr><td colspan="${head.length}" class="muted">Пусто</td></tr>`}</tbody></table></div>`;
+function vAdmin(sub) {
+  const bc = (n) => `<div class="breadcrumbs"><a href="#/admin">Админ</a>${n ? ' / ' + n : ''}</div>`;
+  const btn = (a, id, t, cls = '') => `<button class="btn btn-sm ${cls}" data-action="${a}" data-id="${id}">${t}</button>`;
+  if (!sub) {
+    const k = [['users', 'Пользователи', db.users.length], ['videos', 'Видео', db.videos.length], ['comments', 'Комментарии', db.comments.length], ['reports', 'Открытые жалобы', db.reports.filter((r) => r.status === 'open').length], ['ai', 'ИИ-запросы', db.ai.length]];
+    return { title: 'Админ', html: `${bc('')}<h1 class="section-title">Дашборд</h1><div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(180px,1fr))">${k.map(([p, l, n]) => `<a class="glass side-card" href="#/admin/${p}"><div class="kpi"><span class="n">${n}</span><span class="l">${l}</span></div></a>`).join('')}</div><div class="row mt-2"><a class="btn" href="#/admin/settings">Настройки</a></div>` };
+  }
+  if (sub === 'users') return { title: 'Админ — пользователи', html: `${bc('Пользователи')}<h1 class="section-title">Пользователи</h1>${tbl(['ID', 'Логин', 'Email', 'Роль', 'Статус', ''], db.users.map((u) => `<tr><td>${u.id}</td><td>${esc(u.username)}</td><td>${esc(u.email)}</td><td>${u.role}</td><td>${u.active ? 'активен' : 'отключён'}</td><td class="nowrap">${u.id === meId ? '<span class="muted text-sm">это вы</span>' : btn('u-active', u.id, u.active ? 'Отключить' : 'Включить') + ' ' + btn('u-admin', u.id, u.role === 'admin' ? 'Снять админа' : 'Сделать админом')}</td></tr>`))}` };
+  if (sub === 'videos') return { title: 'Админ — видео', html: `${bc('Видео')}<h1 class="section-title">Видео</h1>${tbl(['ID', 'Название', 'Канал', 'Статус', ''], db.videos.map((v) => `<tr><td>${v.id}</td><td><a href="#/watch/${v.id}">${esc(v.title)}</a></td><td>${esc(chanOf(v).name)}</td><td>${v.status}</td><td class="nowrap">${v.status !== 'published' ? btn('v-publish', v.id, 'Опубликовать') : ''} ${v.status !== 'blocked' ? btn('v-block', v.id, 'Блок') : ''} ${btn('v-del', v.id, 'Удалить', 'btn-danger')}</td></tr>`))}` };
+  if (sub === 'comments') return { title: 'Админ — комментарии', html: `${bc('Комментарии')}<h1 class="section-title">Комментарии</h1>${tbl(['ID', 'Автор', 'Текст', 'Статус', ''], db.comments.map((c) => `<tr><td>${c.id}</td><td>${esc(userById(c.user_id)?.username || '—')}</td><td>${esc(c.body.slice(0, 120))}</td><td>${c.status}</td><td class="nowrap">${c.status === 'visible' ? btn('c-hide', c.id, 'Скрыть') : btn('c-restore', c.id, 'Вернуть')} ${btn('c-del', c.id, 'Удалить', 'btn-danger')}</td></tr>`))}` };
+  if (sub === 'reports') return { title: 'Админ — жалобы', html: `${bc('Жалобы')}<h1 class="section-title">Жалобы</h1>${tbl(['ID', 'Объект', 'Причина', 'Детали', 'Статус', ''], db.reports.map((r) => `<tr><td>${r.id}</td><td>${r.target_type === 'video' ? `<a href="#/watch/${r.target_id}">видео #${r.target_id}</a>` : `комментарий #${r.target_id}`}</td><td>${esc(r.reason)}</td><td>${esc(r.details || '')}</td><td>${r.status}</td><td class="nowrap">${r.status === 'open' ? btn('r-resolve', r.id, 'Решено') + ' ' + btn('r-dismiss', r.id, 'Отклонить') : ''}</td></tr>`))}` };
+  if (sub === 'ai') return { title: 'Админ — ИИ', html: `${bc('ИИ-логи')}<h1 class="section-title">ИИ-запросы</h1>${tbl(['ID', 'Пользователь', 'Задача', 'Провайдер', 'Статус', 'Время'], [...db.ai].reverse().slice(0, 200).map((a) => `<tr><td>${a.id}</td><td>${esc(userById(a.user_id)?.username || 'гость')}</td><td>${a.task}</td><td>${a.provider}</td><td>${a.status}</td><td>${new Date(a.ts).toLocaleString('ru-RU')}</td></tr>`))}` };
+  if (sub === 'settings') { const s = db.settings; return { title: 'Админ — настройки', html: `${bc('Настройки')}<h1 class="section-title">Настройки</h1><div class="glass-strong" style="max-width:640px;padding:22px"><form data-form="adminsettings">
+    <div class="field checkbox-row"><input type="checkbox" name="enable_ai" id="s1" ${s.enable_ai ? 'checked' : ''}><label for="s1" style="color:var(--text)">Включить ИИ-функции</label></div>
+    <div class="field checkbox-row"><input type="checkbox" name="require_video_approval" id="s2" ${s.require_video_approval ? 'checked' : ''}><label for="s2" style="color:var(--text)">Требовать премодерацию видео админом</label></div>
+    <div class="field checkbox-row"><input type="checkbox" name="registration_open" id="s3" ${s.registration_open ? 'checked' : ''}><label for="s3" style="color:var(--text)">Открыть регистрацию новых пользователей</label></div>
+    <div class="field"><label>Максимальный размер загрузки (МБ)</label><input class="input" type="number" name="video_max_mb" min="1" value="${s.video_max_mb}"></div>
+    <div class="field"><label>Дневной лимит ИИ-запросов (авторизованные)</label><input class="input" type="number" name="ai_daily_limit_auth" min="0" value="${s.ai_daily_limit_auth}"></div>
+    <button class="btn btn-primary" type="submit">Сохранить</button></form></div>
+    <div class="glass mt-2" style="max-width:640px;padding:16px"><div class="muted text-sm">Данные хранятся только в этом браузере.</div><button class="btn btn-sm btn-danger mt-1" data-action="reset-all">Сбросить все данные</button></div>` }; }
+  return v404();
+}
+
+// ---------------------------------------------------------------- router
+const AUTH_ROUTES = ['upload', 'settings', 'subscriptions', 'history'];
+function render() {
+  if (!db) return;
+  const { parts, q } = parseHash(); const r = parts[0] || '', a = parts[1];
+  let res;
+  if (AUTH_ROUTES.includes(r) && !me()) { toast('Войдите, чтобы продолжить.', 'error'); return go('/login'); }
+  if (r === 'admin' && !isAdmin()) res = v404();
+  else if ((r === 'login' || r === 'register') && me()) return go('/');
+  else if (r === 'video' && parts[2] === 'edit') res = me() ? vVideoEdit(a) : (go('/login'), null);
+  else switch (r) {
+    case '': res = vHome(q); break;
+    case 'search': res = vSearch(q); break;
+    case 'category': res = vCategory(a); break;
+    case 'tag': res = vTag(decodeURIComponent(a || '')); break;
+    case 'channel': res = vChannel(a); break;
+    case 'watch': res = vWatch(a); break;
+    case 'login': res = vAuth('login'); break;
+    case 'register': res = vAuth('register'); break;
+    case 'upload': res = vUpload(); break;
+    case 'settings': res = vSettings(); break;
+    case 'playlist': res = vPlaylist(a); break;
+    case 'subscriptions': res = vSubs(); break;
+    case 'history': res = vHistory(); break;
+    case 'rules': res = vRules(); break;
+    case 'admin': res = vAdmin(a); break;
+    default: res = v404();
+  }
+  if (!res) return;
+  $('#nav').innerHTML = navHtml();
+  $('#main').innerHTML = res.html;
+  document.title = res.title;
+  window.scrollTo(0, 0);
+  if (res.after === 'watch') afterWatch(res.videoId);
+}
+
+async function afterWatch(id) {
+  const v = videoById(id), u = me();
+  const key = 'gt-viewed-' + id;
+  try { if (!sessionStorage.getItem(key)) { sessionStorage.setItem(key, '1'); v.views++; save(); } } catch (_) {}
+  let hist = null;
+  if (u) {
+    hist = db.history.find((h) => h.user_id === u.id && h.video_id === id);
+    if (!hist) { hist = { user_id: u.id, video_id: id, ts: now(), progress: 0, duration: v.duration }; db.history.push(hist); }
+    hist.ts = now(); save();
+  }
+  if (!v.file) return;
+  const el = $('#gt-player'); if (!el) return;
+  try {
+    const blob = await idb.get('v' + id);
+    if (!blob) { el.insertAdjacentHTML('afterend', '<div class="muted text-sm" style="padding:12px">Файл видео не найден в хранилище браузера.</div>'); return; }
+    el.src = URL.createObjectURL(blob);
+    el.addEventListener('loadedmetadata', () => { if (hist && hist.progress > 5 && hist.progress < el.duration - 5) el.currentTime = hist.progress; });
+    let last = 0;
+    el.addEventListener('timeupdate', () => { if (hist && el.currentTime - last > 3) { last = el.currentTime; hist.progress = Math.floor(el.currentTime); hist.duration = Math.floor(el.duration || 0); hist.ts = now(); save(); } });
+  } catch (e) { console.warn(e); }
+}
+
+// ---------------------------------------------------------------- actions
+const need = () => { if (!me()) { go('/login'); return false; } return true; };
+function readVideoMeta(file) {
+  return new Promise((res) => {
+    const url = URL.createObjectURL(file), v = document.createElement('video');
+    v.preload = 'metadata'; v.muted = true; v.src = url;
+    const done = (o) => { URL.revokeObjectURL(url); res(o); };
+    v.onloadedmetadata = () => { const dur = v.duration; v.currentTime = Math.min(1, dur / 2 || 0); v.onseeked = () => { try { const c = document.createElement('canvas'); c.width = 480; c.height = Math.round(480 * (v.videoHeight || 9) / (v.videoWidth || 16)); c.getContext('2d').drawImage(v, 0, 0, c.width, c.height); done({ duration: Math.round(dur), thumb: c.toDataURL('image/jpeg', .7) }); } catch (_) { done({ duration: Math.round(dur) }); } }; };
+    v.onerror = () => done({ duration: 0 });
+    setTimeout(() => done({ duration: 0 }), 8000);
+  });
+}
+const parseTags = (s) => [...new Set(String(s || '').split(',').map((t) => t.trim()).filter(Boolean))].slice(0, 10);
+
+const clickActions = {
+  theme() { const n = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light'; document.documentElement.setAttribute('data-theme', n); store.set('gt-theme', n); $('#nav').innerHTML = navHtml(); },
+  logout() { meId = null; store.set('gt-session', null); go('/'); toast('Вы вышли.'); },
+  quiet() { document.body.classList.toggle('quiet'); store.set('gt-quiet', document.body.classList.contains('quiet')); },
+  'desc-toggle'(b) { const e = $('#desc-box').classList.toggle('expanded'); b.textContent = e ? 'Свернуть' : 'Показать полностью'; },
+  like(b) { if (!need()) return; const id = +b.dataset.id, i = db.likes.findIndex((l) => l.user_id === meId && l.video_id === id); i >= 0 ? db.likes.splice(i, 1) : db.likes.push({ user_id: meId, video_id: id }); save(); b.classList.toggle('active', i < 0); b.innerHTML = (i < 0 ? '❤️ ' : '🤍 ') + '<span>' + fmtNum(likeCount(id)) + '</span>'; },
+  save(b) { if (!need()) return; const id = +b.dataset.id, i = db.saved.findIndex((l) => l.user_id === meId && l.video_id === id); i >= 0 ? db.saved.splice(i, 1) : db.saved.push({ user_id: meId, video_id: id }); save(); b.classList.toggle('active', i < 0); b.textContent = i < 0 ? '🔖 Сохранено' : '🔖 Сохранить'; },
+  subscribe(b) { if (!need()) return; const id = +b.dataset.id, i = db.subs.findIndex((l) => l.user_id === meId && l.channel_id === id); i >= 0 ? db.subs.splice(i, 1) : db.subs.push({ user_id: meId, channel_id: id }); save(); b.classList.toggle('active', i < 0); b.textContent = i < 0 ? '✓ Вы подписаны' : '＋ Подписаться'; },
+  'report-open'(b) { const m = $('#report-modal'); m.querySelector('[name=target_type]').value = b.dataset.type; m.querySelector('[name=target_id]').value = b.dataset.id; m.classList.add('open'); },
+  'report-close'() { $('#report-modal').classList.remove('open'); },
+  'delete-comment'(b) { if (!confirm('Удалить комментарий?')) return; db.comments = db.comments.filter((c) => c.id !== +b.dataset.id); save(); render(); },
+  'ai-summarize'(b) {
+    if (!aiAllowed()) return; const v = videoById(b.dataset.id), out = $('#ai-result');
+    out.innerHTML = '<div class="ai-loading">ИИ-помощник думает…</div>'; aiLog('summarize');
+    setTimeout(() => {
+      const topics = v.tags.length ? v.tags : aiSuggestTags(v.title + ' ' + v.description), step = Math.max(10, Math.floor((v.duration || 90) / 3));
+      out.innerHTML = `<div class="ai-result"><strong>Краткое описание</strong><br>${esc(`Обзор видео «${v.title}». ` + (v.description ? v.description.slice(0, 200) : 'Описание отсутствует.'))}</div>
+        <div class="ai-result mt-1"><strong>Темы:</strong> ${topics.map(esc).join(', ')}</div>
+        <div class="ai-result mt-1"><strong>Главы:</strong><ul style="margin:6px 0 0 18px">${['Вступление', 'Основная часть', 'Заключение'].map((t, i) => `<li>${fmtDur(i * step)} — ${t}</li>`).join('')}</ul></div>
+        <div class="ai-result mt-1 muted">⚠️ Демо-режим: используется mock-провайдер без внешнего ИИ.</div>`;
+    }, 450);
+  },
+  'ai-similar'(b) { if (!aiAllowed()) return; aiLog('search'); go('/search?q=' + encodeURIComponent(videoById(b.dataset.id).title) + '&ai=1'); },
+  'ai-meta'() {
+    if (!aiAllowed()) return; aiLog('metadata');
+    const t = $('#u-title'), d = $('#u-desc'), g = $('#u-tags'), title = t.value.trim();
+    if (title) t.value = title.charAt(0).toUpperCase() + title.slice(1).toLowerCase();
+    const tags = parseTags(g.value); if (!tags.length) g.value = aiSuggestTags(title + ' ' + d.value).join(', ');
+    $('#ai-meta-result').innerHTML = '<div class="ai-result">✨ Метаданные обновлены (mock-провайдер).</div>';
+  },
+  'ai-tags'() {
+    if (!aiAllowed()) return; aiLog('suggest_tags');
+    const sug = aiSuggestTags($('#u-title').value + ' ' + $('#u-desc').value), g = $('#u-tags');
+    g.value = [...new Set([...parseTags(g.value), ...sug])].slice(0, 10).join(', ');
+    $('#ai-meta-result').innerHTML = `<div class="ai-result">🏷️ ${sug.length ? 'Добавлены теги: ' + esc(sug.join(', ')) : 'Не из чего предлагать — заполните название и описание.'}</div>`;
+  },
+  'video-delete'(b) { if (!confirm('Удалить видео безвозвратно?')) return; const id = +b.dataset.id; db.videos = db.videos.filter((v) => v.id !== id); db.comments = db.comments.filter((c) => c.video_id !== id); idb.del('v' + id); save(); toast('Видео удалено.'); go('/'); },
+  'history-clear'() { db.history = db.history.filter((h) => h.user_id !== meId); save(); render(); },
+  'pl-delete'(b) { if (!confirm('Удалить плейлист?')) return; db.playlists = db.playlists.filter((p) => p.id !== +b.dataset.id); save(); go('/settings'); },
+  'pl-remove'(b) { const p = db.playlists.find((x) => x.id === +b.dataset.id); p.items = p.items.filter((i) => i !== +b.dataset.video); save(); render(); },
+  'u-active'(b) { const u = userById(+b.dataset.id); u.active = !u.active; save(); render(); },
+  'u-admin'(b) { const u = userById(+b.dataset.id); u.role = u.role === 'admin' ? 'user' : 'admin'; save(); render(); },
+  'v-publish'(b) { videoById(b.dataset.id).status = 'published'; save(); render(); },
+  'v-block'(b) { videoById(b.dataset.id).status = 'blocked'; save(); render(); },
+  'v-del'(b) { if (!confirm('Удалить видео?')) return; const id = +b.dataset.id; db.videos = db.videos.filter((v) => v.id !== id); idb.del('v' + id); save(); render(); },
+  'c-hide'(b) { db.comments.find((c) => c.id === +b.dataset.id).status = 'hidden'; save(); render(); },
+  'c-restore'(b) { db.comments.find((c) => c.id === +b.dataset.id).status = 'visible'; save(); render(); },
+  'c-del'(b) { db.comments = db.comments.filter((c) => c.id !== +b.dataset.id); save(); render(); },
+  'r-resolve'(b) { db.reports.find((r) => r.id === +b.dataset.id).status = 'resolved'; save(); render(); },
+  'r-dismiss'(b) { db.reports.find((r) => r.id === +b.dataset.id).status = 'dismissed'; save(); render(); },
+  async 'reset-all'() { if (!confirm('Удалить все данные, включая загруженные видео?')) return; localStorage.removeItem('gt-db'); localStorage.removeItem('gt-session'); try { indexedDB.deleteDatabase('glasstube'); } catch (_) {} idb._db = null; meId = null; load(); go('/'); },
+};
+
+const formActions = {
+  navsearch(f) { go('/search?q=' + encodeURIComponent(f.q.value.trim())); },
+  search(f) { const p = new URLSearchParams(); if (f.q.value.trim()) p.set('q', f.q.value.trim()); if (f.category.value) p.set('category', f.category.value); if (f.sort.value !== 'relevance') p.set('sort', f.sort.value); if (f.ai.checked) p.set('ai', '1'); go('/search?' + p); },
+  login(f) {
+    const l = f.login.value.trim().toLowerCase(), u = db.users.find((x) => x.username.toLowerCase() === l || x.email.toLowerCase() === l);
+    if (!u || u.pass !== hash32(f.password.value)) return toast('Неверный логин или пароль.', 'error');
+    if (!u.active) return toast('Аккаунт отключён.', 'error');
+    meId = u.id; store.set('gt-session', meId); toast('С возвращением, ' + u.username + '!'); go('/');
+  },
+  register(f) {
+    const un = f.username.value.trim(), em = f.email.value.trim();
+    if (!/^[A-Za-z0-9_]{3,30}$/.test(un)) return toast('Логин: 3–30 символов, латиница, цифры, _.', 'error');
+    if (db.users.some((x) => x.username.toLowerCase() === un.toLowerCase() || x.email.toLowerCase() === em.toLowerCase())) return toast('Логин или email уже заняты.', 'error');
+    const u = { id: nid(), username: un, email: em, pass: hash32(f.password.value), role: 'user', bio: '', active: true, created: now() };
+    db.users.push(u); db.channels.push({ id: nid(), user_id: u.id, name: un, slug: un.toLowerCase(), description: '' });
+    save(); meId = u.id; store.set('gt-session', meId); toast('Аккаунт создан. Добро пожаловать!'); go('/');
+  },
+  comment(f) {
+    const body = f.body.value.trim(); if (!body) return;
+    const ok = !db.settings.enable_ai || aiModerate(body);
+    if (db.settings.enable_ai) { if (aiAllowed()) aiLog('moderate'); }
+    db.comments.push({ id: nid(), video_id: +f.dataset.id, user_id: meId, body, status: ok ? 'visible' : 'hidden', created: now() }); save();
+    toast(ok ? 'Комментарий добавлен.' : 'Комментарий скрыт ИИ-модерацией: похоже на спам.', ok ? 'success' : 'error'); render();
+  },
+  report(f) {
+    db.reports.push({ id: nid(), user_id: meId, target_type: f.target_type.value, target_id: +f.target_id.value, reason: f.reason.value, details: f.details.value.trim(), status: 'open', ts: now() }); save();
+    $('#report-modal').classList.remove('open'); f.reset(); toast('Жалоба отправлена. Спасибо!');
+  },
+  settings(f) {
+    const u = me(), ch = chanByUser(u.id); u.bio = f.bio.value.trim(); ch.name = f.channel_name.value.trim(); ch.description = f.channel_description.value.trim();
+    if (f.new_password.value) { if (u.pass !== hash32(f.current_password.value)) return toast('Текущий пароль неверный.', 'error'); u.pass = hash32(f.new_password.value); }
+    save(); toast('Настройки сохранены.'); render();
+  },
+  plcreate(f) { db.playlists.push({ id: nid(), user_id: meId, name: f.name.value.trim(), visibility: f.visibility.value, items: [] }); save(); toast('Плейлист создан.'); render(); },
+  videoedit(f) {
+    const v = videoById(f.dataset.id); v.title = f.title.value.trim(); v.description = f.description.value.trim(); v.category_id = f.category_id.value ? +f.category_id.value : null; v.tags = parseTags(f.tags.value); v.visibility = f.visibility.value;
+    save(); toast('Видео обновлено.'); go('/watch/' + v.id);
+  },
+  adminsettings(f) {
+    Object.assign(db.settings, { enable_ai: f.enable_ai.checked, require_video_approval: f.require_video_approval.checked, registration_open: f.registration_open.checked, video_max_mb: Math.max(1, +f.video_max_mb.value || 1024), ai_daily_limit_auth: Math.max(0, +f.ai_daily_limit_auth.value || 0) });
+    save(); toast('Настройки сохранены.');
+  },
+  async upload(f) {
+    const err = $('#upload-error'), btn = f.querySelector('button[type=submit]'); err.textContent = '';
+    const file = f.file.files[0]; if (!file) { err.textContent = 'Выберите видеофайл.'; return; }
+    const ext = file.name.split('.').pop().toLowerCase();
+    if (!['mp4', 'webm'].includes(ext)) { err.textContent = 'Недопустимое расширение. Разрешены: mp4, webm.'; return; }
+    if (file.size > db.settings.video_max_mb * 1048576) { err.textContent = `Файл слишком большой (максимум ${db.settings.video_max_mb} МБ).`; return; }
+    btn.disabled = true; btn.textContent = 'Обработка…';
+    try {
+      const meta = await readVideoMeta(file), id = nid();
+      await idb.put('v' + id, file);
+      const needReview = db.settings.require_video_approval;
+      db.videos.push({ id, user_id: meId, channel_id: chanByUser(meId).id, category_id: f.category_id.value ? +f.category_id.value : null, title: f.title.value.trim(), description: f.description.value.trim(), tags: parseTags(f.tags.value), visibility: f.visibility.value, status: needReview ? 'pending_review' : 'published', views: 0, duration: meta.duration, thumb: meta.thumb, created: now(), hue: Math.floor(Math.random() * 360), file: true });
+      save(); toast(needReview ? 'Видео отправлено на проверку.' : 'Видео загружено!'); go('/watch/' + id);
+    } catch (e) { console.error(e); err.textContent = 'Не удалось сохранить видео в браузере (возможно, мало места).'; btn.disabled = false; btn.textContent = 'Загрузить видео'; }
+  },
+};
+
+document.addEventListener('click', (e) => {
+  const m = e.target.closest('#report-modal'); if (m && e.target === m) m.classList.remove('open');
+  const b = e.target.closest('[data-action]'); if (!b) return;
+  const fn = clickActions[b.dataset.action]; if (fn) { e.preventDefault(); fn(b); }
+});
+document.addEventListener('submit', (e) => {
+  const f = e.target.closest('[data-form]'); if (!f) return;
+  e.preventDefault(); const fn = formActions[f.dataset.form]; if (fn) fn(f);
+});
+document.addEventListener('change', (e) => {
+  const t = e.target;
+  if (t.matches('[data-autosubmit]')) t.form.requestSubmit();
+  if (t.matches('[data-action-change="addpl"]') && t.value) {
+    const p = db.playlists.find((x) => x.id === +t.value), id = +t.dataset.id;
+    if (!p.items.includes(id)) p.items.push(id); save(); toast('Добавлено в «' + p.name + '».'); t.value = '';
+  }
+});
+window.addEventListener('hashchange', render);
+
+// ---------------------------------------------------------------- boot
+(function boot() {
+  const th = store.get('gt-theme', null); if (th) document.documentElement.setAttribute('data-theme', th);
+  if (store.get('gt-quiet', false)) document.body.classList.add('quiet');
+  load();
+  render();
+})();
+
+</script>
+</body>
+</html>
