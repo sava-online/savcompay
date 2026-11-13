@@ -1,0 +1,96 @@
+/* ============================================================
+   GlassTube — App components (app.css)
+   ============================================================ */
+
+/* ---------- Watch page ---------- */
+.watch-layout {
+  display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 22px;
+  align-items: start;
+}
+@media (max-width: 980px) { .watch-layout { grid-template-columns: 1fr; } }
+
+.player-wrap {
+  position: relative; border-radius: var(--radius); overflow: hidden;
+  border: 1px solid var(--glass-border);
+  background: #000; box-shadow: var(--shadow);
+}
+.player-wrap video { width: 100%; display: block; background: #000; aspect-ratio: 16/9; }
+
+.watch-title { font-size: 1.4rem; font-weight: 680; margin: 14px 0 6px; }
+.watch-sub { color: var(--muted); display: flex; gap: 10px; flex-wrap: wrap; align-items: center; font-size: .9rem; }
+
+.action-bar {
+  display: flex; gap: 10px; flex-wrap: wrap; margin: 14px 0; align-items: center;
+  padding: 10px 12px; border-radius: 16px;
+  background: var(--glass-bg); border: 1px solid var(--glass-border);
+  backdrop-filter: blur(var(--glass-blur));
+}
+.action-bar .btn.active { color: var(--accent); border-color: var(--ring); }
+
+.description-box {
+  margin-top: 12px; padding: 14px 16px; border-radius: 16px;
+  background: var(--glass-bg); border: 1px solid var(--glass-border);
+  white-space: pre-wrap; max-height: 220px; overflow: hidden; position: relative;
+}
+.description-box.expanded { max-height: none; }
+
+.side-card { padding: 14px 16px; margin-bottom: 16px; }
+.tag-list { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+
+/* ---------- AI assistant ---------- */
+.ai-panel {
+  padding: 16px; border-radius: 18px; margin-top: 16px;
+  background: linear-gradient(135deg, rgba(124,140,255,.14), rgba(67,198,255,.10));
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(var(--glass-blur));
+}
+.ai-panel h4 { margin: 0 0 8px; display: flex; align-items: center; gap: 8px; }
+.ai-result { margin-top: 12px; padding: 12px; border-radius: 12px; background: var(--glass-bg); border: 1px solid var(--glass-border); white-space: pre-wrap; }
+.ai-loading { opacity: .6; font-style: italic; }
+.ai-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+
+/* ---------- Comments ---------- */
+.comment-form textarea { min-height: 84px; }
+.comment {
+  display: flex; gap: 12px; padding: 12px 0; border-top: 1px solid var(--glass-border);
+}
+.comment .body { flex: 1; }
+.comment .body .name { font-weight: 600; font-size: .92rem; }
+.comment .body .time { color: var(--muted); font-size: .78rem; }
+.comment .body .text { margin-top: 4px; white-space: pre-wrap; }
+.comment.hidden-comment { opacity: .55; font-style: italic; }
+
+/* ---------- Tables (admin) ---------- */
+.table { width: 100%; border-collapse: collapse; }
+.table th, .table td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--glass-border); font-size: .9rem; }
+.table th { color: var(--muted); font-weight: 600; }
+.table tr:hover td { background: var(--glass-bg); }
+
+/* ---------- Auth / centered forms ---------- */
+.auth-wrap { max-width: 420px; margin: 40px auto; padding: 26px; }
+.auth-wrap h1 { font-size: 1.4rem; margin: 0 0 6px; }
+
+/* ---------- Channel header ---------- */
+.channel-head { display: flex; gap: 18px; align-items: center; padding: 18px; margin-bottom: 18px; }
+.channel-head .name { font-size: 1.4rem; font-weight: 700; }
+.channel-head .desc { color: var(--muted); }
+
+/* ---------- Range slider (quiet mode etc.) ---------- */
+input[type="range"] { accent-color: var(--accent); }
+.checkbox-row { display: flex; gap: 10px; align-items: flex-start; }
+.checkbox-row input { margin-top: 4px; }
+
+/* ---------- Utilities ---------- */
+.text-center { text-align: center; }
+.mt-0 { margin-top: 0; }
+.mt-1 { margin-top: 8px; }
+.mt-2 { margin-top: 16px; }
+.mb-1 { margin-bottom: 8px; }
+.flex { display: flex; }
+.gap-1 { gap: 8px; }
+.items-center { align-items: center; }
+.text-sm { font-size: .85rem; }
+.nowrap { white-space: nowrap; }
+
+/* Quiet mode hides secondary blocks */
+body.quiet .quiet-hide { display: none !important; }
